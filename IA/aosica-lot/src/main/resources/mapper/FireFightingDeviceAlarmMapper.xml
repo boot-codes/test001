@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aosica.lot.mapper.FireFightingDeviceAlarmMapper">
+  <resultMap id="BaseResultMap" type="com.aosica.lot.entity.FireFightingDeviceAlarm">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="device_id" jdbcType="BIGINT" property="deviceId" />
+    <result column="alarm_type" jdbcType="INTEGER" property="alarmType" />
+    <result column="alarm_item" jdbcType="VARCHAR" property="alarmItem" />
+    <result column="alarm_value" jdbcType="VARCHAR" property="alarmValue" />
+    <result column="alarm_reason" jdbcType="VARCHAR" property="alarmReason" />
+    <result column="alarm_time" jdbcType="VARCHAR" property="alarmTime" />
+    <result column="is_handle" jdbcType="INTEGER" property="isHandle" />
+    <result column="handel_result" jdbcType="VARCHAR" property="handelResult" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="handle_time" jdbcType="TIMESTAMP" property="handleTime" />
+    <result column="handler" jdbcType="BIGINT" property="handler" />
+  </resultMap>
+
+
+
+
+
+  <sql id="Base_Column_List">
+    id, device_id, alarm_type, alarm_item, alarm_value, alarm_reason, alarm_time, is_handle, 
+    handel_result, create_time, creater, update_time, updater
+  </sql>
+
+
+  <!--  添加数据-->
+  <insert id="insert" parameterType="com.aosica.lot.entity.FireFightingDeviceAlarm">
+    insert into t_fire_fighting_device_alarm (id, device_id, alarm_type,
+      alarm_item, alarm_value, alarm_reason,
+      alarm_time, is_handle, handel_result,
+      create_time, creater, update_time,
+      updater)
+    values (#{id,jdbcType=BIGINT}, #{deviceId,jdbcType=BIGINT}, #{alarmType,jdbcType=INTEGER},
+      #{alarmItem,jdbcType=VARCHAR}, #{alarmValue,jdbcType=VARCHAR}, #{alarmReason,jdbcType=VARCHAR},
+      #{alarmTime,jdbcType=VARCHAR}, #{isHandle,jdbcType=INTEGER}, #{handelResult,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+      #{updater,jdbcType=VARCHAR})
+  </insert>
+
+
+
+  <select id="list" resultType="com.aosica.lot.dto.FireFightingDeviceAlarmDto">
+    SELECT
+        a.id as 'id',d.system_type as 'systemType',d.device_type 'deviceType' ,d.device_id 'deviceId' ,d.building_name 'buildingName' ,d.supervision_unit_id
+        ,d.install_location 'installLocation' , d.install_floor 'installFloor'  , a.alarm_type 'alarmType'
+        ,a.alarm_time 'alarmTime' , a.is_handle 'isHandle'  ,a.handle_time 'handleTime'
+    from
+        t_fire_fighting_device_alarm a
+    LEFT JOIN
+            t_fire_fighting_device d on a.device_id = d.id
+             where
+               <if test="dto.projectId != null">
+                 a.project_id= #{dto.projectId}
+               </if>
+
+               <if test="dto.systemType != null ">
+                 and  d.system_type = #{dto.systemType}
+               </if>
+
+               <if test="dto.deviceType != null">
+                 and d.device_type = #{dto.deviceType}
+               </if>
+
+               <if test="dto.deviceId != null">
+                  and a.device_id = #{dto.deviceId}
+               </if>
+
+               <if test="dto.alarmType != null ">
+                 and a.alarm_type = #{dto.alarmType}
+               </if>
+
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aosica.lot.mapper.DeviceAlarmMapper">
+  <resultMap id="BaseResultMap" type="com.aosica.lot.entity.DeviceAlarm">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="device_id" jdbcType="BIGINT" property="deviceId" />
+    <result column="alarm_type" jdbcType="INTEGER" property="alarmType" />
+    <result column="alarm_item" jdbcType="VARCHAR" property="alarmItem" />
+    <result column="alarm_value" jdbcType="VARCHAR" property="alarmValue" />
+    <result column="alarm_reason" jdbcType="VARCHAR" property="alarmReason" />
+    <result column="collection_time" jdbcType="VARCHAR" property="collectionTime" />
+    <result column="is_handle" jdbcType="INTEGER" property="isHandle" />
+    <result column="handel_result" jdbcType="VARCHAR" property="handelResult" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+  </resultMap>
+
+
+
+
+  <sql id="Base_Column_List">
+    id, device_id, alarm_type, alarm_item, alarm_value, alarm_reason, collection_time,
+    is_handle, handel_result, create_time, create_by, update_time, update_by
+  </sql>
+
+
+  <insert id="insert" parameterType="com.aosica.lot.entity.DeviceAlarm">
+    insert into t_device_alarm (id, device_id, alarm_type,
+    alarm_item, alarm_value, alarm_reason,
+    collection_time, is_handle, handel_result,
+    create_time, create_by, update_time,
+    update_by)
+    values (#{id,jdbcType=BIGINT}, #{deviceId,jdbcType=BIGINT}, #{alarmType,jdbcType=INTEGER},
+    #{alarmItem,jdbcType=VARCHAR}, #{alarmValue,jdbcType=VARCHAR}, #{alarmReason,jdbcType=VARCHAR},
+    #{collectionTime,jdbcType=VARCHAR}, #{isHandle,jdbcType=INTEGER}, #{handelResult,jdbcType=VARCHAR},
+    #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+    #{updateBy,jdbcType=VARCHAR})
+  </insert>
+
+
+  <update id="updateById" parameterType="com.aosica.lot.entity.DeviceAlarm">
+    update t_device_alarm
+    <set>
+      <if test="deviceId != null">
+        device_id = #{deviceId,jdbcType=BIGINT},
+      </if>
+      <if test="alarmType != null">
+        alarm_type = #{alarmType,jdbcType=INTEGER},
+      </if>
+      <if test="alarmItem != null">
+        alarm_item = #{alarmItem,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmValue != null">
+        alarm_value = #{alarmValue,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmReason != null">
+        alarm_reason = #{alarmReason,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionTime != null">
+        collection_time = #{collectionTime,jdbcType=VARCHAR},
+      </if>
+      <if test="isHandle != null">
+        is_handle = #{isHandle,jdbcType=INTEGER},
+      </if>
+      <if test="handelResult != null">
+        handel_result = #{handelResult,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <!--  <sql id="Example_Where_Clause">-->
+  <!--    <where>-->
+  <!--      <foreach collection="oredCriteria" item="criteria" separator="or">-->
+  <!--        <if test="criteria.valid">-->
+  <!--          <trim prefix="(" prefixOverrides="and" suffix=")">-->
+  <!--            <foreach collection="criteria.criteria" item="criterion">-->
+  <!--              <choose>-->
+  <!--                <when test="criterion.noValue">-->
+  <!--                  and ${criterion.condition}-->
+  <!--                </when>-->
+  <!--                <when test="criterion.singleValue">-->
+  <!--                  and ${criterion.condition} #{criterion.value}-->
+  <!--                </when>-->
+  <!--                <when test="criterion.betweenValue">-->
+  <!--                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+  <!--                </when>-->
+  <!--                <when test="criterion.listValue">-->
+  <!--                  and ${criterion.condition}-->
+  <!--                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">-->
+  <!--                    #{listItem}-->
+  <!--                  </foreach>-->
+  <!--                </when>-->
+  <!--              </choose>-->
+  <!--            </foreach>-->
+  <!--          </trim>-->
+  <!--        </if>-->
+  <!--      </foreach>-->
+  <!--    </where>-->
+  <!--  </sql>-->
+
+
+  <!--  <sql id="Update_By_Example_Where_Clause">-->
+  <!--    <where>-->
+  <!--      <foreach collection="example.oredCriteria" item="criteria" separator="or">-->
+  <!--        <if test="criteria.valid">-->
+  <!--          <trim prefix="(" prefixOverrides="and" suffix=")">-->
+  <!--            <foreach collection="criteria.criteria" item="criterion">-->
+  <!--              <choose>-->
+  <!--                <when test="criterion.noValue">-->
+  <!--                  and ${criterion.condition}-->
+  <!--                </when>-->
+  <!--                <when test="criterion.singleValue">-->
+  <!--                  and ${criterion.condition} #{criterion.value}-->
+  <!--                </when>-->
+  <!--                <when test="criterion.betweenValue">-->
+  <!--                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}-->
+  <!--                </when>-->
+  <!--                <when test="criterion.listValue">-->
+  <!--                  and ${criterion.condition}-->
+  <!--                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">-->
+  <!--                    #{listItem}-->
+  <!--                  </foreach>-->
+  <!--                </when>-->
+  <!--              </choose>-->
+  <!--            </foreach>-->
+  <!--          </trim>-->
+  <!--        </if>-->
+  <!--      </foreach>-->
+  <!--    </where>-->
+  <!--  </sql>-->
+
+
+<!--  <select id="selectByExample" parameterType="com.aosica.netty.entity.DeviceAlarmExample" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <if test="distinct">-->
+<!--      distinct-->
+<!--    </if>-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_device_alarm-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--    <if test="orderByClause != null">-->
+<!--      order by ${orderByClause}-->
+<!--    </if>-->
+<!--  </select>-->
+
+
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+<!--    select -->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_device_alarm-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </select>-->
+
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">-->
+<!--    delete from t_device_alarm-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </delete>-->
+<!--  -->
+
+<!--  <delete id="deleteByExample" parameterType="com.aosica.netty.entity.DeviceAlarmExample">-->
+<!--    delete from t_device_alarm-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </delete>-->
+
+
+
+
+
+<!--  <insert id="insertSelective" parameterType="com.aosica.netty.entity.DeviceAlarm">-->
+<!--    insert into t_device_alarm-->
+<!--    <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--      <if test="id != null">-->
+<!--        id,-->
+<!--      </if>-->
+<!--      <if test="deviceId != null">-->
+<!--        device_id,-->
+<!--      </if>-->
+<!--      <if test="alarmType != null">-->
+<!--        alarm_type,-->
+<!--      </if>-->
+<!--      <if test="alarmItem != null">-->
+<!--        alarm_item,-->
+<!--      </if>-->
+<!--      <if test="alarmValue != null">-->
+<!--        alarm_value,-->
+<!--      </if>-->
+<!--      <if test="alarmReason != null">-->
+<!--        alarm_reason,-->
+<!--      </if>-->
+<!--      <if test="collectionTime != null">-->
+<!--        collection_time,-->
+<!--      </if>-->
+<!--      <if test="isHandle != null">-->
+<!--        is_handle,-->
+<!--      </if>-->
+<!--      <if test="handelResult != null">-->
+<!--        handel_result,-->
+<!--      </if>-->
+<!--      <if test="createTime != null">-->
+<!--        create_time,-->
+<!--      </if>-->
+<!--      <if test="createBy != null">-->
+<!--        create_by,-->
+<!--      </if>-->
+<!--      <if test="updateTime != null">-->
+<!--        update_time,-->
+<!--      </if>-->
+<!--      <if test="updateBy != null">-->
+<!--        update_by,-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--    <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--      <if test="id != null">-->
+<!--        #{id,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="deviceId != null">-->
+<!--        #{deviceId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="alarmType != null">-->
+<!--        #{alarmType,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="alarmItem != null">-->
+<!--        #{alarmItem,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="alarmValue != null">-->
+<!--        #{alarmValue,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="alarmReason != null">-->
+<!--        #{alarmReason,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="collectionTime != null">-->
+<!--        #{collectionTime,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="isHandle != null">-->
+<!--        #{isHandle,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="handelResult != null">-->
+<!--        #{handelResult,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="createTime != null">-->
+<!--        #{createTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="createBy != null">-->
+<!--        #{createBy,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="updateTime != null">-->
+<!--        #{updateTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="updateBy != null">-->
+<!--        #{updateBy,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--  </insert>-->
+
+
+
+<!--  <select id="countByExample" parameterType="com.aosica.netty.entity.DeviceAlarmExample" resultType="java.lang.Long">-->
+<!--    select count(*) from t_device_alarm-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </select>-->
+
+
+<!--  <update id="updateByExampleSelective" parameterType="map">-->
+<!--    update t_device_alarm-->
+<!--    <set>-->
+<!--      <if test="record.id != null">-->
+<!--        id = #{record.id,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.deviceId != null">-->
+<!--        device_id = #{record.deviceId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.alarmType != null">-->
+<!--        alarm_type = #{record.alarmType,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="record.alarmItem != null">-->
+<!--        alarm_item = #{record.alarmItem,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.alarmValue != null">-->
+<!--        alarm_value = #{record.alarmValue,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.alarmReason != null">-->
+<!--        alarm_reason = #{record.alarmReason,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.collectionTime != null">-->
+<!--        collection_time = #{record.collectionTime,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.isHandle != null">-->
+<!--        is_handle = #{record.isHandle,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="record.handelResult != null">-->
+<!--        handel_result = #{record.handelResult,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.createTime != null">-->
+<!--        create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="record.createBy != null">-->
+<!--        create_by = #{record.createBy,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.updateTime != null">-->
+<!--        update_time = #{record.updateTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="record.updateBy != null">-->
+<!--        update_by = #{record.updateBy,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Update_By_Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </update>-->
+
+
+<!--  <update id="updateByExample" parameterType="map">-->
+<!--    update t_device_alarm-->
+<!--    set id = #{record.id,jdbcType=BIGINT},-->
+<!--      device_id = #{record.deviceId,jdbcType=BIGINT},-->
+<!--      alarm_type = #{record.alarmType,jdbcType=INTEGER},-->
+<!--      alarm_item = #{record.alarmItem,jdbcType=VARCHAR},-->
+<!--      alarm_value = #{record.alarmValue,jdbcType=VARCHAR},-->
+<!--      alarm_reason = #{record.alarmReason,jdbcType=VARCHAR},-->
+<!--      collection_time = #{record.collectionTime,jdbcType=VARCHAR},-->
+<!--      is_handle = #{record.isHandle,jdbcType=INTEGER},-->
+<!--      handel_result = #{record.handelResult,jdbcType=VARCHAR},-->
+<!--      create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+<!--      create_by = #{record.createBy,jdbcType=VARCHAR},-->
+<!--      update_time = #{record.updateTime,jdbcType=TIMESTAMP},-->
+<!--      update_by = #{record.updateBy,jdbcType=VARCHAR}-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Update_By_Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </update>-->
+
+
+
+
+
+
+<!--  <update id="updateByPrimaryKey" parameterType="com.aosica.netty.entity.DeviceAlarm">-->
+<!--    update t_device_alarm-->
+<!--    set device_id = #{deviceId,jdbcType=BIGINT},-->
+<!--      alarm_type = #{alarmType,jdbcType=INTEGER},-->
+<!--      alarm_item = #{alarmItem,jdbcType=VARCHAR},-->
+<!--      alarm_value = #{alarmValue,jdbcType=VARCHAR},-->
+<!--      alarm_reason = #{alarmReason,jdbcType=VARCHAR},-->
+<!--      collection_time = #{collectionTime,jdbcType=VARCHAR},-->
+<!--      is_handle = #{isHandle,jdbcType=INTEGER},-->
+<!--      handel_result = #{handelResult,jdbcType=VARCHAR},-->
+<!--      create_time = #{createTime,jdbcType=TIMESTAMP},-->
+<!--      create_by = #{createBy,jdbcType=VARCHAR},-->
+<!--      update_time = #{updateTime,jdbcType=TIMESTAMP},-->
+<!--      update_by = #{updateBy,jdbcType=VARCHAR}-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </update>-->
+
+
+</mapper>

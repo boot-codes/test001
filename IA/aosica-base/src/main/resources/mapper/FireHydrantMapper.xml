@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.FireHydrantMapper">
+
+    <select id="queryList" parameterType="com.aoscia.base.dto.FireHydrantDto" resultType="com.aoscia.base.dto.FireHydrantDto">
+        select
+        ifnull(tbf.id, "")                            id,
+        ifnull(tbf.number, "")                        number,
+        ifnull(tbf.unit_type, 0)                     unitType,
+        ifnull(tbf.start_date, "")                   startDate,
+        ifnull(tbf.water_gage, "")                   waterGage,
+        ifnull(tbf.runing_condition, "")             runingCondition,
+        ifnull(tbf.manager, "")                      manager,
+        ifnull(tbf.mobile, "")                       mobile,
+        (select d.name from t_base_area d where d.code = tbf.belong_area) AS areaName,
+        (select d.name from t_base_area d where d.code = tbf.belong_street) AS street,
+        (select d.name from t_base_area d where d.code = tbf.belong_community) AS community,
+        ifnull(tbf.monitoring_unit, "")               monitoringUnit,
+        ifnull(tbf.longitude, "")                     longitude,
+        ifnull(tbf.latitude, "")                      latitude,
+        ifnull(tbf.location, "")                      location,
+        ifnull(tbf.service_name, "")                  serviceName,
+        ifnull(tbf.project_id, "")                    projectId
+        from t_base_fire_hydrant tbf
+        <where>
+            <if test="number != null and number !=''">
+                tbf.number  like CONCAT ("%",#{number},"%")
+            </if>
+            <if test="unitType != null and unitType != 0">
+                and  tbf.unit_type =#{unitType}
+            </if>
+
+        </where>
+        order by tbf.create_time desc
+    </select>
+
+    <select id="queryById" parameterType="String" resultType="com.aoscia.base.dto.FireHydrantDto">
+        select
+        ifnull(tbf.id, "")                            id,
+        ifnull(tbf.number, "")                        number,
+        ifnull(tbf.unit_type, 0)                     unitType,
+        ifnull(tbf.start_date, "")                   startDate,
+        ifnull(tbf.water_gage, "")                   waterGage,
+        ifnull(tbf.runing_condition, "")             runingCondition,
+        ifnull(tbf.manager, "")                      manager,
+        ifnull(tbf.mobile, "")                       mobile,
+        (select d.name from t_base_area d where d.code = tbf.belong_area) AS areaName,
+        (select d.name from t_base_area d where d.code = tbf.belong_street) AS street,
+        (select d.name from t_base_area d where d.code = tbf.belong_community) AS community,
+        ifnull(tbf.monitoring_unit, "")               monitoringUnit,
+        ifnull(tbf.longitude, "")                     longitude,
+        ifnull(tbf.latitude, "")                      latitude,
+        ifnull(tbf.location, "")                      location,
+        ifnull(tbf.service_name, "")                  serviceName,
+        ifnull(tbf.project_id, "")                    projectId
+        from t_base_fire_hydrant tbf  where tbf.id =#{id}
+    </select>
+
+    <insert id="insert" parameterType="com.aoscia.base.dto.FireHydrantDto">
+        insert into t_base_fire_hydrant
+        (id,number, belong_area,belong_street,belong_community,
+        unit_type,start_date,water_gage,runing_condition,manager,mobile,
+        monitoring_unit,longitude,latitude,location,service_name,project_id,create_time
+        )values (
+        #{id},#{number}, #{belongArea},#{belongStreet},#{belongCommunity},
+        #{unitType},#{startDate},#{waterGage},#{runingCondition},#{manager},#{mobile},#{monitoringUnit},
+       #{longitude},#{latitude},#{location},#{serviceName},#{projectId},#{createTime}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.aoscia.base.dto.FireHydrantDto">
+        update t_base_fire_hydrant
+        <set>
+            <if test="number !=null and number != ''">
+                number =#{number},
+            </if>
+            <if test="unitType !=null and unitType != 0">
+                unit_type =#{unitType},
+            </if>
+            <if test="startDate !=null and startDate != ''">
+                start_date =#{startDate},
+            </if>
+            <if test="waterGage !=null and waterGage != ''">
+                water_gage =#{waterGage},
+            </if>
+            <if test="runingCondition !=null and runingCondition != ''">
+                runing_condition =#{runingCondition},
+            </if>
+            <if test="manager !=null and manager != ''">
+                manager =#{manager},
+            </if>
+            <if test="mobile !=null and mobile != ''">
+                mobile =#{mobile},
+            </if>
+            <if test="belongArea != null">
+                belong_area =#{belongArea},
+            </if>
+            <if test="belongStreet != null and belongStreet != ''">
+                belong_street =#{belongStreet},
+            </if>
+            <if test="belongCommunity != null and belongCommunity != ''">
+                belong_community =#{belongCommunity},
+            </if>
+            <if test="longitude != null and longitude != ''">
+                longitude =#{longitude},
+            </if>
+            <if test="latitude != null and latitude != ''">
+                latitude =#{latitude},
+            </if>
+            <if test="location != null and location != ''">
+                location =#{location},
+            </if>
+            <if test="serviceName != null and serviceName != ''">
+                service_name =#{serviceName},
+            </if>
+
+            <if test="projectId != null and projectId != ''">
+                project_id =#{projectId},
+            </if>
+            <if test="updateTime != null">
+                update_time =#{updateTime},
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+    <delete id="remove" parameterType="String">
+        delete from t_base_fire_hydrant where id =#{id}
+    </delete>
+</mapper>

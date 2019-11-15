@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.BuildingSecurityMassageMapper">
+
+    <select id="queryBuildingSecurityMassageByBuildingId" parameterType="String" resultMap="buildingImportantPartEntityMap">
+        select
+          ifnull(tbb.id, "")                            id,
+          ifnull(tbb.fire_control_room, "")             fireControlRoom,
+          ifnull(tbb.safe_exit, "")                     safeExit,
+          ifnull(tbb.evacuation_staircase, "")          evacuationStaircase,
+          ifnull(tbb.fire_lane, "")                     fireLane,
+          ifnull(tbb.other_facilities, "")              otherFacilities
+        from t_base_buildings tbb where id =#{buildingId}
+
+
+    </select>
+
+    <select id="queryImportantPartByBuildingId" parameterType="String" resultType="com.aoscia.base.dto.BuildingImportantPartEntity">
+        select
+          ifnull(tbb.id, "")                            id,
+          ifnull(tbb.picture_url, "")                   pictureUrl,
+          ifnull(tbb.picture_describe, "")              pictureDescribe,
+          ifnull(tbb.building_id, "")                   buildingId,
+          ifnull(tbb.foor, "")                          foor,
+          ifnull(tbb.location, "")                      location,
+          ifnull(tbb.fire_extinguisher_type, "")        fireExtinguisherType
+         from t_base_building_important_part tbb where building_id =#{buildingId}
+
+    </select>
+
+    <update id="update" parameterType="com.aoscia.base.dto.BuildingSecurityMassageDto">
+        update t_base_buildings
+        <set>
+            <if test="fireControlRoom != null and fireControlRoom !=''">
+                fire_control_room =#{fireControlRoom},
+            </if>
+            <if test="safeExit != null and safeExit !=''">
+                safe_exit =#{safeExit},
+            </if>
+            <if test="evacuationStaircase != null and evacuationStaircase !=0">
+                evacuation_staircase =#{evacuationStaircase},
+            </if>
+            <if test="fireLane != null and fireLane != ''">
+                fire_lane =#{fireLane},
+            </if>
+            <if test="otherFacilities != null and otherFacilities != ''">
+                other_facilities =#{otherFacilities},
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+
+
+    <update id="updateImportantPart" parameterType="com.aoscia.base.dto.BuildingImportantPartEntity">
+        update t_base_building_important_part
+        <set>
+            <if test="pictureUrl != null and pictureUrl !=''">
+                picture_url =#{pictureUrl},
+            </if>
+            <if test="pictureDescribe != null and pictureDescribe !=''">
+                picture_describe =#{pictureDescribe},
+
+            </if>
+            <if test="buildingId != null and buildingId !=0">
+                building_id =#{buildingId},
+            </if>
+            <if test="foor != null and foor != ''">
+                foor =#{foor},
+            </if>
+            <if test="location != null and location != ''">
+                location =#{location},
+            </if>
+            <if test="fireExtinguisherType != null and fireExtinguisherType != 0">
+                fire_extinguisher_type =#{fireExtinguisherType},
+            </if>
+
+        </set>
+        where id =#{id}
+    </update>
+
+    <insert id="insertImportantPart" parameterType="com.aoscia.base.dto.BuildingImportantPartEntity">
+        insert into t_base_building_important_part
+        (id,picture_url,picture_describe,building_id,foor,location,fire_extinguisher_type)
+        values
+        (#{id},#{pictureUrl},#{pictureDescribe},#{buildingId},#{foor},#{location},#{fireExtinguisherType})
+    </insert>
+
+    <delete id="removeBuildingImportantPart" parameterType="String">
+        delete from t_base_building_important_part where id =#{importantPartId}
+    </delete>
+
+    <resultMap id="buildingImportantPartEntityMap" type="com.aoscia.base.dto.BuildingSecurityMassageDto" >
+        <collection property="buildingImportantPartEntitys" select="queryImportantPartByBuildingId" column="id">
+        </collection>
+    </resultMap>
+
+
+
+</mapper>

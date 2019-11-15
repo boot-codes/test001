@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.DeptMapper">
+
+    <insert id="insert" parameterType="com.aoscia.base.dto.DeptDto">
+            insert into ai_dept (id) values (#{id});
+    </insert>
+
+    <select id="queryListByUserId" parameterType="String" resultType="com.aoscia.base.dto.DeptDto">
+        select   ifnull(id, "")         AS                   id,
+                 ifnull(name, "")       AS                   name,
+                 ifnull(type, "")       AS                   type,
+                 ifnull(parent_id, "")  AS                   pId,
+                 ifnull(remark, "")     AS                   remark
+        from t_basic_dept
+        where project_id =#{projectId}
+    </select>
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aosica.message.sms.mapper.MessageMapper">
+
+    <insert id="save" parameterType="com.aosica.message.sms.entity.MessageEntity">
+        insert into t_basic_message (id,type,mobile,wechat_name,content,create_time)
+        values
+        (#{id},#{type},#{mobile},#{wechatName},#{content},#{createTime})
+    </insert>
+</mapper>

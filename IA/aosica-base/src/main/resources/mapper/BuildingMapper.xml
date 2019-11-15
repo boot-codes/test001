@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.BuildingMapper">
+
+    <select id="queryList" parameterType="com.aoscia.base.dto.BuildingDto" resultType="com.aoscia.base.dto.BuildingDto">
+        select
+          ifnull(tbb.id, "")                            id,
+          ifnull(tbb.building_num, "")                  buildingNum,
+          ifnull(tbb.name, "")                          name,
+          ifnull(tbb.type, "")                          type,
+          ifnull(tbb.safety_duty, "")                   safetyDuty,
+          ifnull(tbb.safety_duty_name, "")              safetyDutyName,
+          ifnull(tbb.safety_duty_phone, "")             safetyDutyPhone,
+          ifnull(tbb.purpose, "")                       purpose,
+        (select d.name from t_base_area d where d.code = tbb.belong_area) AS areaName,
+          ifnull(tbb.longitude, "")                     longitude,
+          ifnull(tbb.latitude, "")                      latitude,
+          ifnull(tbb.location, "")                      location,
+          ifnull(tbb.territorial_jurisdiction, "")      territorialJurisdiction,
+          ifnull(tbb.rescue_jurisdiction, "")           rescueJurisdiction,
+          ifnull(tbb.law_enforcement_jurisdiction, "")  lawEnforcementJurisdiction,
+          ifnull(tbb.overground_num, "")                overgroundNum,
+          ifnull(tbb.underground_num, "")               undergroundNum,
+          ifnull(tbb.service_name, "")                  serviceName,
+          ifnull(tbb.dept_id, "")                       deptId
+         from t_base_buildings tbb
+        <where>
+            <if test="name != null and name !=''">
+                tbb.name  like CONCAT ("%",#{name},"%")
+            </if>
+            <if test="projectId != null and projectId != ''">
+              and  tbb.project_id =#{projectId}
+            </if>
+            <if test="type != null and type != ''">
+                and  type =#{type}
+            </if>
+            <if test="belongArea != null and belongArea != ''">
+                and  tbb.belong_area
+            </if>
+        </where>
+        order by tbb.create_time desc
+    </select>
+
+
+    <insert id="insert" parameterType="com.aoscia.base.dto.BuildingDto">
+        insert into t_base_buildings
+        (id,building_num,name,type,safety_duty,safety_duty_name,safety_duty_phone,
+        purpose,belong_area,longitude,latitude,location,territorial_jurisdiction,
+        rescue_jurisdiction,law_enforcement_jurisdiction,overground_num,underground_num,
+        service_name,project_id,dept_id,create_time)
+        values
+        (#{id},#{buildingNum},#{name},#{type},#{safetyDuty},#{safetyDutyName},#{safetyDutyPhone},
+        #{purpose},#{belongArea},#{longitude},#{latitude},#{location},#{territorialJurisdiction},
+        #{rescueJurisdiction},#{lawEnforcementJurisdiction},#{overgroundNum},#{undergroundNum},
+        #{serviceName},#{projectId},#{deptId},#{createTime})
+    </insert>
+
+    <update id="update" parameterType="com.aoscia.base.dto.BuildingDto">
+        update t_base_buildings
+        <set>
+            <if test="buildingNum != null and buildingNum !=''">
+                building_num =#{buildingNum},
+            </if>
+            <if test="name != null and name !=''">
+                name =#{name},
+            </if>
+            <if test="type != null and type !=0">
+                type =#{type},
+            </if>
+            <if test="safetyDuty != null and safetyDuty != ''">
+                safety_duty =#{safetyDuty},
+            </if>
+            <if test="safetyDutyName != null and safetyDutyName != ''">
+                safety_duty_name =#{safetyDutyName},
+            </if>
+            <if test="safetyDutyPhone != null and safetyDutyPhone != ''">
+                safety_duty_phone =#{safetyDutyPhone},
+            </if>
+            <if test="safetyManager != null and safetyManager != ''">
+                safety_manager =#{safetyManager},
+            </if>
+
+            <if test="purpose != null and purpose != 0">
+                purpose =#{purpose},
+            </if>
+            <if test="belongArea != null and belongArea != ''">
+            belong_area =#{belongArea},
+            </if>
+            <if test="longitude != null and longitude != ''">
+                longitude =#{longitude},
+            </if>
+            <if test="latitude != null and latitude != ''">
+                latitude =#{latitude},
+            </if>
+            <if test="location != null and location != ''">
+                location =#{location},
+            </if>
+            <if test="territorialJurisdiction != null and territorialJurisdiction != ''">
+                territorial_jurisdiction =#{territorialJurisdiction},
+            </if>
+            <if test="rescueJurisdiction != null and rescueJurisdiction != ''">
+                rescue_jurisdiction =#{rescueJurisdiction},
+            </if>
+            <if test="lawEnforcementJurisdiction != null and lawEnforcementJurisdiction != ''">
+                law_enforcement_jurisdiction =#{lawEnforcementJurisdiction},
+            </if>
+            <if test="overgroundNum != null and overgroundNum != ''">
+                overground_num =#{overgroundNum},
+            </if>
+            <if test="undergroundNum != null and undergroundNum != ''">
+                underground_num =#{undergroundNum},
+            </if>
+            <if test="serviceName != null and serviceName != ''">
+                service_name =#{serviceName},
+            </if>
+            <if test="projectId != null and projectId != ''">
+                project_id =#{projectId},
+            </if>
+            <if test="deptId != null and deptId != ''">
+                dept_id =#{deptId},
+            </if>
+            <if test="updateTime != null">
+                update_time =#{updateTime},
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+    <select id="queryById" parameterType="String" resultType="com.aoscia.base.dto.BuildingDto">
+          select
+          ifnull(tbb.id, "")                            id,
+          ifnull(tbb.building_num, "")                  buildingNum,
+          ifnull(tbb.name, "")                          name,
+          ifnull(tbb.type, "")                          type,
+          ifnull(tbb.safety_duty, "")                   safetyDuty,
+          ifnull(tbb.safety_duty_name, "")              safetyDutyName,
+          ifnull(tbb.safety_duty_phone, "")             safetyDutyPhone,
+          ifnull(tbb.safety_manager, "")                safetyManager,
+          ifnull(tbb.purpose, "")                       purpose,
+          ifnull(tbb.belong_area, "")                   belongArea,
+          ifnull(tbb.longitude, "")                     longitude,
+          ifnull(tbb.latitude, "")                      latitude,
+          ifnull(tbb.location, "")                      location,
+          ifnull(tbb.territorial_jurisdiction, "")      territorialJurisdiction,
+          ifnull(tbb.rescue_jurisdiction, "")           rescueJurisdiction,
+          ifnull(tbb.law_enforcement_jurisdiction, "")  lawEnforcementJurisdiction,
+          ifnull(tbb.overground_num, "")                overgroundNum,
+          ifnull(tbb.underground_num, "")               undergroundNum,
+          ifnull(tbb.service_name, "")                  serviceName,
+          ifnull(tbb.dept_id, "")                       deptId
+         from t_base_buildings tbb
+         where tbb.id =#{id}
+    </select>
+
+    <delete id="remove" parameterType="String">
+        delete from t_base_buildings where id =#{id}
+    </delete>
+
+
+
+   <!-- <select id="queryBuildingManager" parameterType="String" resultType="com.aoscia.base.entity.SafetyBuildingManagerEntity">
+        select id,safety_manager as safetyManager,safety_manager_mobile AS safetyManagerMobile
+        FROM t_basic_building_safety_manager WHERE building_id = #{buildingId}
+    </select>-->
+</mapper>

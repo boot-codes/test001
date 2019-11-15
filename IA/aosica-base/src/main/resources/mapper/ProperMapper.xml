@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.ProperMapper">
+
+    <insert id="insert" parameterType="com.aoscia.base.dto.ProperDto">
+            insert into ai_proper (id,model,proper,unit) values (#{id},#{model},#{proper},#{unit});
+    </insert>
+
+    <select id="get" parameterType="java.lang.String" resultType="com.aoscia.base.dto.ProperDto">
+        select id,mobile,password,salt from ai_proper where mobile=#{account} or email=#{account}
+    </select>
+
+    <update id="update" parameterType="com.aoscia.base.dto.ProperDto">
+        update ai_proper
+        <set>
+            <if test="name!= null and name != '' ">
+                name = #{name},
+            </if>
+        </set>
+        <where>
+            <if test="id !=null and id !=''">
+                id=#{id}
+            </if>
+        </where>
+    </update>
+
+    <select id="selectById">
+        select id from ai_proper where id=#{id}
+    </select>
+
+    <select id="getList" resultType="com.aoscia.base.dto.ProperDto" parameterType="map">
+        <include refid="getList"></include>
+    </select>
+
+    <sql id="getList">
+        select * from ai_proper
+        where 1=1
+        <if test="model!= null and model != '' ">
+            model = #{model}
+        </if>
+    </sql>
+
+    <select id="getListCount" resultType="Integer" parameterType="map">
+        select count(1) from (<include refid="getList"></include>) tab
+    </select>
+
+    <delete id="delete" parameterType="list">
+        delete from ai_proper where 1=1
+        and id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+
+    <delete id="deleteByModel" parameterType="Long">
+        delete from ai_proper where 1=1
+        <if test="_parameter != null">
+            and model = #{_parameter,jdbcType=INTEGER}
+        </if>
+    </delete>
+
+
+    <insert id="increase" parameterType="map">
+          insert into ai_proper (id,model,proper) values (#{id},#{model},#{proper});
+    </insert>
+
+    <select id="getProperById" resultType="map">
+        select sd.name,m.*,p.* from sys_dict sd
+        left join ai_model m
+        on sd.id=m.type
+        left join ai_proper p
+        on m.model=p.model
+        where 1=1
+        and m.id = #{id}
+    </select>
+
+</mapper>

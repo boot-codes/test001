@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aosica.lot.mapper.DeviceDataMapper">
+  <resultMap id="BaseResultMap" type="com.aosica.lot.entity.DeviceData">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="gateway_id" jdbcType="VARCHAR" property="gatewayId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_model" jdbcType="VARCHAR" property="deviceModel" />
+    <result column="windS" jdbcType="FLOAT" property="winds" />
+    <result column="windD" jdbcType="FLOAT" property="windD" />
+    <result column="airH" jdbcType="FLOAT" property="airH" />
+    <result column="airT" jdbcType="FLOAT" property="airT" />
+    <result column="ill" jdbcType="FLOAT" property="ill" />
+    <result column="atm" jdbcType="FLOAT" property="atm" />
+    <result column="rainF" jdbcType="FLOAT" property="rainF" />
+    <result column="soilH" jdbcType="FLOAT" property="soilH" />
+    <result column="soilT" jdbcType="FLOAT" property="soilT" />
+    <result column="soilC" jdbcType="FLOAT" property="soilC" />
+    <result column="soilS" jdbcType="FLOAT" property="soilS" />
+    <result column="dPH" jdbcType="FLOAT" property="dPH" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+  </resultMap>
+
+
+
+  <sql id="Base_Column_List">
+    id, project_id, gateway_id, device_id, device_model, windS, windD, airH, airT, ill, 
+    atm, rainF, soilH, soilT, soilC, soilS, dPH, remark, create_time, create_by
+  </sql>
+
+
+
+  <insert id="insert" parameterType="com.aosica.lot.entity.DeviceData">
+    insert into t_device_data (id, project_id, gateway_id,
+      device_id, device_model, windS,
+      windD, airH, airT, ill,
+      atm, rainF, soilH, soilT,
+      soilC, soilS, dPH, remark,
+      create_time, create_by)
+    values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=VARCHAR}, #{gatewayId,jdbcType=VARCHAR},
+      #{deviceId,jdbcType=VARCHAR}, #{deviceModel,jdbcType=VARCHAR}, #{winds,jdbcType=FLOAT},
+      #{windD,jdbcType=FLOAT,}, #{airH,jdbcType=FLOAT}, #{airT,jdbcType=FLOAT}, #{ill,jdbcType=FLOAT},
+      #{atm,jdbcType=FLOAT}, #{rainF,jdbcType=FLOAT}, #{soilH,jdbcType=FLOAT}, #{soilT,jdbcType=FLOAT},
+      #{soilC,jdbcType=REAL}, #{soilS,jdbcType=FLOAT}, #{dPH,jdbcType=FLOAT}, #{remark,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR})
+  </insert>
+
+
+
+  <!--  获取 指定工程，指定网关id  设备最新的一条记录。-->
+  <select id="getNewestDeviceData" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List"/>
+    from t_device_data
+    where  project_id=#{projectId} and gateway_id=#{gateWayId}
+    order by create_time desc
+    limit 1
+  </select>
+
+
+
+<!--  <select id="selectByExample" parameterType="com.aosica.netty.entity.TDeviceDataExample" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <if test="distinct">-->
+<!--      distinct-->
+<!--    </if>-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_device_data-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--    <if test="orderByClause != null">-->
+<!--      order by ${orderByClause}-->
+<!--    </if>-->
+<!--  </select>-->
+
+
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+<!--    select -->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_device_data-->
+<!--    where id = #{id,jdbcType=VARCHAR}-->
+<!--  </select>-->
+<!--  -->
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">-->
+<!--    delete from t_device_data-->
+<!--    where id = #{id,jdbcType=VARCHAR}-->
+<!--  </delete>-->
+
+<!--  <delete id="deleteByExample" parameterType="com.aosica.netty.entity.TDeviceDataExample">-->
+<!--    delete from t_device_data-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </delete>-->
+
+
+
+  <!--  <select id="countByExample" parameterType="com.aosica.netty.entity.TDeviceDataExample" resultType="java.lang.Long">-->
+<!--    select count(*) from t_device_data-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </select>-->
+
+
+
+
+
+
+
+
+<!--  <select id="selectByExample" parameterType="com.aosica.netty.entity.TDeviceDataExample" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <if test="distinct">-->
+<!--      distinct-->
+<!--    </if>-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_device_data-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--    <if test="orderByClause != null">-->
+<!--      order by ${orderByClause}-->
+<!--    </if>-->
+<!--  </select>-->
+
+
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">-->
+<!--    select -->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_device_data-->
+<!--    where id = #{id,jdbcType=VARCHAR}-->
+<!--  </select>-->
+<!--  -->
+
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">-->
+<!--    delete from t_device_data-->
+<!--    where id = #{id,jdbcType=VARCHAR}-->
+<!--  </delete>-->
+
+<!--  <delete id="deleteByExample" parameterType="com.aosica.netty.entity.TDeviceDataExample">-->
+<!--    delete from t_device_data-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </delete>-->
+
+
+
+<!--  <insert id="insert" parameterType="com.aosica.netty.entity.TDeviceData">-->
+<!--    insert into t_device_data (id, project_id, gateway_id, -->
+<!--      device_id, device_model, windS, -->
+<!--      windD, airH, airT, ill, -->
+<!--      atm, rainF, soilH, soilT, -->
+<!--      soilC, soilS, dPH, remark, -->
+<!--      create_time, create_by)-->
+<!--    values (#{id,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{gatewayId,jdbcType=VARCHAR}, -->
+<!--      #{deviceId,jdbcType=VARCHAR}, #{deviceModel,jdbcType=VARCHAR}, #{winds,jdbcType=REAL}, -->
+<!--      #{windd,jdbcType=REAL}, #{airh,jdbcType=REAL}, #{airt,jdbcType=REAL}, #{ill,jdbcType=REAL}, -->
+<!--      #{atm,jdbcType=REAL}, #{rainf,jdbcType=REAL}, #{soilh,jdbcType=REAL}, #{soilt,jdbcType=REAL}, -->
+<!--      #{soilc,jdbcType=REAL}, #{soils,jdbcType=REAL}, #{dph,jdbcType=REAL}, #{remark,jdbcType=VARCHAR}, -->
+<!--      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR})-->
+<!--  </insert>-->
+
+
+<!--  <insert id="insertSelective" parameterType="com.aosica.netty.entity.TDeviceData">-->
+<!--    insert into t_device_data-->
+<!--    <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--      <if test="id != null">-->
+<!--        id,-->
+<!--      </if>-->
+<!--      <if test="projectId != null">-->
+<!--        project_id,-->
+<!--      </if>-->
+<!--      <if test="gatewayId != null">-->
+<!--        gateway_id,-->
+<!--      </if>-->
+<!--      <if test="deviceId != null">-->
+<!--        device_id,-->
+<!--      </if>-->
+<!--      <if test="deviceModel != null">-->
+<!--        device_model,-->
+<!--      </if>-->
+<!--      <if test="winds != null">-->
+<!--        windS,-->
+<!--      </if>-->
+<!--      <if test="windd != null">-->
+<!--        windD,-->
+<!--      </if>-->
+<!--      <if test="airh != null">-->
+<!--        airH,-->
+<!--      </if>-->
+<!--      <if test="airt != null">-->
+<!--        airT,-->
+<!--      </if>-->
+<!--      <if test="ill != null">-->
+<!--        ill,-->
+<!--      </if>-->
+<!--      <if test="atm != null">-->
+<!--        atm,-->
+<!--      </if>-->
+<!--      <if test="rainf != null">-->
+<!--        rainF,-->
+<!--      </if>-->
+<!--      <if test="soilh != null">-->
+<!--        soilH,-->
+<!--      </if>-->
+<!--      <if test="soilt != null">-->
+<!--        soilT,-->
+<!--      </if>-->
+<!--      <if test="soilc != null">-->
+<!--        soilC,-->
+<!--      </if>-->
+<!--      <if test="soils != null">-->
+<!--        soilS,-->
+<!--      </if>-->
+<!--      <if test="dph != null">-->
+<!--        dPH,-->
+<!--      </if>-->
+<!--      <if test="remark != null">-->
+<!--        remark,-->
+<!--      </if>-->
+<!--      <if test="createTime != null">-->
+<!--        create_time,-->
+<!--      </if>-->
+<!--      <if test="createBy != null">-->
+<!--        create_by,-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--    <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--      <if test="id != null">-->
+<!--        #{id,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="projectId != null">-->
+<!--        #{projectId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="gatewayId != null">-->
+<!--        #{gatewayId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="deviceId != null">-->
+<!--        #{deviceId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="deviceModel != null">-->
+<!--        #{deviceModel,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="winds != null">-->
+<!--        #{winds,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="windd != null">-->
+<!--        #{windd,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="airh != null">-->
+<!--        #{airh,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="airt != null">-->
+<!--        #{airt,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="ill != null">-->
+<!--        #{ill,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="atm != null">-->
+<!--        #{atm,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="rainf != null">-->
+<!--        #{rainf,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="soilh != null">-->
+<!--        #{soilh,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="soilt != null">-->
+<!--        #{soilt,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="soilc != null">-->
+<!--        #{soilc,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="soils != null">-->
+<!--        #{soils,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="dph != null">-->
+<!--        #{dph,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="remark != null">-->
+<!--        #{remark,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="createTime != null">-->
+<!--        #{createTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="createBy != null">-->
+<!--        #{createBy,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </trim>-->
+<!--  </insert>-->
+
+
+
+<!--  <select id="countByExample" parameterType="com.aosica.netty.entity.TDeviceDataExample" resultType="java.lang.Long">-->
+<!--    select count(*) from t_device_data-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </select>-->
+
+
+
+
+<!--  <update id="updateByExampleSelective" parameterType="map">-->
+<!--    update t_device_data-->
+<!--    <set>-->
+<!--      <if test="record.id != null">-->
+<!--        id = #{record.id,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.projectId != null">-->
+<!--        project_id = #{record.projectId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.gatewayId != null">-->
+<!--        gateway_id = #{record.gatewayId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.deviceId != null">-->
+<!--        device_id = #{record.deviceId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.deviceModel != null">-->
+<!--        device_model = #{record.deviceModel,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.winds != null">-->
+<!--        windS = #{record.winds,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.windd != null">-->
+<!--        windD = #{record.windd,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.airh != null">-->
+<!--        airH = #{record.airh,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.airt != null">-->
+<!--        airT = #{record.airt,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.ill != null">-->
+<!--        ill = #{record.ill,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.atm != null">-->
+<!--        atm = #{record.atm,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.rainf != null">-->
+<!--        rainF = #{record.rainf,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.soilh != null">-->
+<!--        soilH = #{record.soilh,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.soilt != null">-->
+<!--        soilT = #{record.soilt,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.soilc != null">-->
+<!--        soilC = #{record.soilc,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.soils != null">-->
+<!--        soilS = #{record.soils,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.dph != null">-->
+<!--        dPH = #{record.dph,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="record.remark != null">-->
+<!--        remark = #{record.remark,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.createTime != null">-->
+<!--        create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="record.createBy != null">-->
+<!--        create_by = #{record.createBy,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Update_By_Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </update>-->
+
+
+
+<!--  <update id="updateByExample" parameterType="map">-->
+<!--    update t_device_data-->
+<!--    set id = #{record.id,jdbcType=VARCHAR},-->
+<!--      project_id = #{record.projectId,jdbcType=VARCHAR},-->
+<!--      gateway_id = #{record.gatewayId,jdbcType=VARCHAR},-->
+<!--      device_id = #{record.deviceId,jdbcType=VARCHAR},-->
+<!--      device_model = #{record.deviceModel,jdbcType=VARCHAR},-->
+<!--      windS = #{record.winds,jdbcType=REAL},-->
+<!--      windD = #{record.windd,jdbcType=REAL},-->
+<!--      airH = #{record.airh,jdbcType=REAL},-->
+<!--      airT = #{record.airt,jdbcType=REAL},-->
+<!--      ill = #{record.ill,jdbcType=REAL},-->
+<!--      atm = #{record.atm,jdbcType=REAL},-->
+<!--      rainF = #{record.rainf,jdbcType=REAL},-->
+<!--      soilH = #{record.soilh,jdbcType=REAL},-->
+<!--      soilT = #{record.soilt,jdbcType=REAL},-->
+<!--      soilC = #{record.soilc,jdbcType=REAL},-->
+<!--      soilS = #{record.soils,jdbcType=REAL},-->
+<!--      dPH = #{record.dph,jdbcType=REAL},-->
+<!--      remark = #{record.remark,jdbcType=VARCHAR},-->
+<!--      create_time = #{record.createTime,jdbcType=TIMESTAMP},-->
+<!--      create_by = #{record.createBy,jdbcType=VARCHAR}-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Update_By_Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </update>-->
+
+
+<!--  <update id="updateByPrimaryKeySelective" parameterType="com.aosica.netty.entity.TDeviceData">-->
+<!--    update t_device_data-->
+<!--    <set>-->
+<!--      <if test="projectId != null">-->
+<!--        project_id = #{projectId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="gatewayId != null">-->
+<!--        gateway_id = #{gatewayId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="deviceId != null">-->
+<!--        device_id = #{deviceId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="deviceModel != null">-->
+<!--        device_model = #{deviceModel,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="winds != null">-->
+<!--        windS = #{winds,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="windd != null">-->
+<!--        windD = #{windd,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="airh != null">-->
+<!--        airH = #{airh,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="airt != null">-->
+<!--        airT = #{airt,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="ill != null">-->
+<!--        ill = #{ill,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="atm != null">-->
+<!--        atm = #{atm,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="rainf != null">-->
+<!--        rainF = #{rainf,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="soilh != null">-->
+<!--        soilH = #{soilh,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="soilt != null">-->
+<!--        soilT = #{soilt,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="soilc != null">-->
+<!--        soilC = #{soilc,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="soils != null">-->
+<!--        soilS = #{soils,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="dph != null">-->
+<!--        dPH = #{dph,jdbcType=REAL},-->
+<!--      </if>-->
+<!--      <if test="remark != null">-->
+<!--        remark = #{remark,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="createTime != null">-->
+<!--        create_time = #{createTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="createBy != null">-->
+<!--        create_by = #{createBy,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    where id = #{id,jdbcType=VARCHAR}-->
+<!--  </update>-->
+
+
+
+<!--  <update id="updateByPrimaryKey" parameterType="com.aosica.netty.entity.TDeviceData">-->
+<!--    update t_device_data-->
+<!--    set project_id = #{projectId,jdbcType=VARCHAR},-->
+<!--      gateway_id = #{gatewayId,jdbcType=VARCHAR},-->
+<!--      device_id = #{deviceId,jdbcType=VARCHAR},-->
+<!--      device_model = #{deviceModel,jdbcType=VARCHAR},-->
+<!--      windS = #{winds,jdbcType=REAL},-->
+<!--      windD = #{windd,jdbcType=REAL},-->
+<!--      airH = #{airh,jdbcType=REAL},-->
+<!--      airT = #{airt,jdbcType=REAL},-->
+<!--      ill = #{ill,jdbcType=REAL},-->
+<!--      atm = #{atm,jdbcType=REAL},-->
+<!--      rainF = #{rainf,jdbcType=REAL},-->
+<!--      soilH = #{soilh,jdbcType=REAL},-->
+<!--      soilT = #{soilt,jdbcType=REAL},-->
+<!--      soilC = #{soilc,jdbcType=REAL},-->
+<!--      soilS = #{soils,jdbcType=REAL},-->
+<!--      dPH = #{dph,jdbcType=REAL},-->
+<!--      remark = #{remark,jdbcType=VARCHAR},-->
+<!--      create_time = #{createTime,jdbcType=TIMESTAMP},-->
+<!--      create_by = #{createBy,jdbcType=VARCHAR}-->
+<!--    where id = #{id,jdbcType=VARCHAR}-->
+<!--  </update>-->
+
+
+</mapper>

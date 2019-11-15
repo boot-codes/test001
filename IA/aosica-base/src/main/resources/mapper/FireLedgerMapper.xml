@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.FireLedgerMapper">
+
+    <select id="queryList" parameterType="com.aoscia.base.dto.FireLedgerDto"  resultType="com.aoscia.base.dto.FireLedgerDto">
+        select
+        ifnull(tbf.id, "")                            id,
+        ifnull(tbf.number, "")                        number,
+        ifnull(tbf.type, 0)                           type,
+        ifnull(tbf.brand, "")                         brand,
+        ifnull(tbf.model, "")                         model,
+        ifnull(tbf.date_manufacture, "")              dateManufacture,
+        ifnull(tbf.date_effective, "")                dateEffective,
+        ifnull(tbf.dept_id, "")                       deptId,
+        ifnull(tbf.building_id, "")                   buildingId,
+        ifnull(tbf.floor, "")                         floor,
+        ifnull(tbf.longitude, "")                     longitude,
+        ifnull(tbf.latitude, "")                      latitude,
+        ifnull(tbf.location, "")                      location,
+        ifnull(tbf.remark, "")                        remark,
+        ifnull(tbf.service_name, "")                  serviceName,
+        ifnull(tbf.project_id, "")                    projectId
+        from t_base_fire_ledger tbf
+        <where>
+           <if test="type != null and type != 0">
+                and  tbf.type =#{type}
+            </if>
+            <if test="buildingId != null and buildingId != '' ">
+                and  tbf.building_id =#{buildingId}
+            </if>
+            <if test="deptId != null and deptId != '' ">
+                and  tbf.dept_id =#{deptId}
+            </if>
+            <if test="brand != null and brand != '' ">
+                and  tbf.brand =#{brand}
+            </if>
+            <if test="model != null and model != '' ">
+                and  tbf.model =#{model}
+            </if>
+        </where>
+        order by tbf.create_time desc
+    </select>
+
+
+    <select id="queryById" parameterType="String" resultType="com.aoscia.base.dto.FireLedgerDto">
+        select
+        ifnull(tbf.id, "")                           id,
+        ifnull(tbf.number, "")                       number,
+        ifnull(tbf.type, 0)                          type,
+        ifnull(tbf.brand, "")                        brand,
+        ifnull(tbf.model, "")                        model,
+        ifnull(tbf.date_manufacture, "")             dateManufacture,
+        ifnull(tbf.date_effective, "")               dateEffective,
+        ifnull(tbf.dept_id, "")                      deptId,
+        ifnull(tbf.building_id, "")                  buildingId,
+        ifnull(tbf.floor, "")                        floor,
+        ifnull(tbf.longitude, "")                    longitude,
+        ifnull(tbf.latitude, "")                     latitude,
+        ifnull(tbf.location, "")                     location,
+        ifnull(tbf.remark, "")                       remark,
+        ifnull(tbf.service_name, "")                 serviceName,
+        ifnull(tbf.project_id, "")                   projectId
+        from t_base_fire_ledger tbf  where tbf.id =#{id}
+    </select>
+
+
+    <insert id="insert" parameterType="com.aoscia.base.dto.FireLedgerDto">
+        insert into t_base_fire_ledger
+        (id,number, type,brand,model,
+        date_manufacture,date_effective,dept_id,building_id,floor,longitude,
+        latitude,location,remark,service_name,project_id,create_time
+        )values (
+        #{id},#{number}, #{type},#{brand},#{model},
+        #{dateManufacture},#{dateEffective},#{deptId},#{buildingId},#{floor}, #{longitude},
+        #{latitude},#{location},#{remark},#{serviceName},#{projectId},#{createTime}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.aoscia.base.dto.FireLedgerDto">
+        update t_base_fire_ledger
+        <set>
+            <if test="number !=null and number != ''">
+                number =#{number},
+            </if>
+            <if test="type !=null and type != 0">
+                type =#{type},
+            </if>
+            <if test="brand !=null and brand != ''">
+                brand =#{brand},
+            </if>
+            <if test="model !=null and model != ''">
+                model =#{model},
+            </if>
+            <if test="dateManufacture !=null and dateManufacture != ''">
+                date_manufacture =#{dateManufacture},
+            </if>
+            <if test="dateEffective !=null and dateEffective != ''">
+                date_effective =#{dateEffective},
+            </if>
+            <if test="deptId !=null and deptId != ''">
+                dept_id =#{deptId},
+            </if>
+            <if test="buildingId !=null and buildingId != ''">
+                building_id =#{buildingId},
+            </if>
+            <if test="floor !=null and floor != ''">
+                floor =#{floor},
+            </if>
+            <if test="longitude != null and longitude != ''">
+                longitude =#{longitude},
+            </if>
+            <if test="latitude != null and latitude != ''">
+                latitude =#{latitude},
+            </if>
+            <if test="location != null and location != ''">
+                location =#{location},
+            </if>
+            <if test="serviceName != null and serviceName != ''">
+                service_name =#{serviceName},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark =#{remark},
+            </if>
+            <!--  <if test="projectId != null and projectId != ''">
+                  project_id =#{projectId},
+            </if>-->
+            <if test="projectId != null and projectId != ''">
+                project_id =#{projectId},
+            </if>
+            <if test="updateTime != null">
+                update_time =#{updateTime},
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+<!--    <delete id="remove" parameterType="String">
+        delete from t_base_fire_ledger where id =#{id}
+    </delete>-->
+</mapper>

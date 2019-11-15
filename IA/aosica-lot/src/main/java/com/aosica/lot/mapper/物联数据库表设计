@@ -1,0 +1,57 @@
+
+一、采集器设备表
+
+表名：t_collector_device
+------------------------
+id：主键
+projectId 工程id
+collector_type 采集器类型
+device_model 型号
+deviceId 设备id
+battery_level  //电池电量
+status   //状态
+channel1_data  //通道1数据
+channel2_data  //通道2数据
+channel3_data  //通道3数据
+channel4_data  //通道4数据
+channel5_data //通道5数据
+channel6_data //通道6数据
+channel7_data //通道7数据
+channel8_data //通道8数据
+data_collection_time  //数据采集时间
+
+
+二、采集器设备数据表
+
+t_collector_data
+------------------------
+id
+collector_id
+collector_column
+collector_value
+value_units
+collector_date
+
+
+工程序号  厂商序号  设备编号
+0000     0000    00000000
+
+三、网络控制器表
+
+
+
+四、气象数据表
+
+t_weather_device_data
+-------------------------
+id    主键id
+project_id  String   工程id
+device_id 设备id
+device_model   String  设备型号
+wind_speed  Double   风速  m/s
+wind_direction  Double  风向
+temperature  Double   温度
+humidity  Double     湿度
+atmospheric_pressure  Double   大气压压力
+collector_date  dataTime    采集时间
+

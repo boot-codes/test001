@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.LawEnforcementTeamMapper">
+
+    <select id="queryList" parameterType="com.aoscia.base.dto.LawEnforcementTeamDto" resultType="com.aoscia.base.dto.LawEnforcementTeamDto">
+        select
+        ifnull(tbl.id, "")                            id,
+        ifnull(tbl.name, "")                          name,
+        ifnull(tbl.unit_type, 0)                     unitType,
+        ifnull(tbl.norm_num, 0)                      normNum,
+        ifnull(tbl.reality_num, 0)                   realityNum,
+        ifnull(tbl.manager, "")                      manager,
+        ifnull(tbl.mobile, "")                       mobile,
+        (select d.name from t_base_area d where d.code = tbl.belong_area) AS areaName,
+        (select d.name from t_base_area d where d.code = tbl.belong_street) AS street,
+        (select d.name from t_base_area d where d.code = tbl.belong_community) AS community,
+        ifnull(tbl.longitude, "")                     longitude,
+        ifnull(tbl.latitude, "")                      latitude,
+        ifnull(tbl.location, "")                      location,
+        ifnull(tbl.service_name, "")                  serviceName,
+        ifnull(tbl.project_id, "")                    projectId
+        from t_base_law_enforcement_team tbl
+        <where>
+            <if test="name != null and name !=''">
+                tbl.name  like CONCAT ("%",#{name},"%")
+            </if>
+            <if test="unitType != null and unitType != 0">
+                and  tbl.unit_type =#{unitType}
+            </if>
+
+        </where>
+        order by tbl.create_time desc
+    </select>
+
+    <select id="queryCount" parameterType="com.aoscia.base.dto.LawEnforcementTeamDto" resultType="Integer">
+        select count(tbl.id) as count    from t_base_law_enforcement_team tbl
+        <where>
+            <if test="name != null and name !=''">
+                tbl.name  like CONCAT ("%",#{name},"%")
+            </if>
+            <if test="unitType != null and unitType != 0">
+                and  tbl.unit_type =#{unitType}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="queryById" parameterType="String" resultType="com.aoscia.base.dto.LawEnforcementTeamDto">
+        select
+        ifnull(tbl.id, "")                            id,
+        ifnull(tbl.name, "")                          name,
+        ifnull(tbl.unit_type, 0)                     unitType,
+        ifnull(tbl.norm_num, 0)                      normNum,
+        ifnull(tbl.reality_num, 0)                   realityNum,
+        ifnull(tbl.manager, "")                      manager,
+        ifnull(tbl.mobile, "")                       mobile,
+        (select d.name from t_base_area d where d.code = tbl.belong_area) AS areaName,
+        (select d.name from t_base_area d where d.code = tbl.belong_street) AS street,
+        (select d.name from t_base_area d where d.code = tbl.belong_community) AS community,
+        ifnull(tbl.longitude, "")                     longitude,
+        ifnull(tbl.latitude, "")                      latitude,
+        ifnull(tbl.location, "")                      location,
+        ifnull(tbl.service_name, "")                  serviceName,
+        ifnull(tbl.project_id, "")                    projectId
+        from t_base_law_enforcement_team tbl  where tbl.id =#{id}
+    </select>
+
+    <insert id="insert" parameterType="com.aoscia.base.dto.LawEnforcementTeamDto">
+        insert into t_base_law_enforcement_team
+        (id,name,unit_type,norm_num,reality_num,manager,mobile,
+        belong_area,belong_street,belong_community,
+        longitude,latitude,location,service_name,project_id,create_time
+        )values (
+        #{id},#{name},#{unitType},#{normNum},#{realityNum},#{manager},#{mobile},
+        #{belongArea},#{belongStreet},#{belongCommunity},#{longitude},#{latitude},#{location},#{serviceName},#{projectId},#{createTime}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.aoscia.base.dto.LawEnforcementTeamDto">
+        update t_base_law_enforcement_team
+        <set>
+            <if test="name !=null and name != ''">
+                name =#{name},
+            </if>
+            <if test="unitType !=null and unitType != 0">
+                unit_type =#{unitType},
+            </if>
+            <if test="normNum !=null and normNum != 0">
+                norm_num =#{normNum},
+            </if>
+            <if test="realityNum !=null and realityNum != 0">
+                reality_num =#{realityNum},
+            </if>
+            <if test="manager !=null and manager != ''">
+                manager =#{manager},
+            </if>
+            <if test="mobile !=null and mobile != ''">
+                mobile =#{mobile},
+            </if>
+            <if test="belongArea != null and belongArea != ''">
+                belong_area =#{belongArea},
+            </if>
+            <if test="belongStreet != null and belongStreet != ''">
+                belong_street =#{belongStreet},
+            </if>
+            <if test="belongCommunity != null and belongCommunity != ''">
+                belong_community =#{belongCommunity},
+            </if>
+            <if test="longitude != null and longitude != ''">
+                longitude =#{longitude},
+            </if>
+            <if test="latitude != null and latitude != ''">
+                latitude =#{latitude},
+            </if>
+            <if test="location != null and location != ''">
+                location =#{location},
+            </if>
+            <if test="serviceName != null and serviceName != ''">
+                service_name =#{serviceName},
+            </if>
+            <if test="projectId != null and projectId != ''">
+                project_id =#{projectId},
+            </if>
+          <!--  <if test="projectId != null and projectId != ''">
+                project_id =#{projectId},
+            </if>-->
+            <!--<if test="updateTime != null and updateTime != ''">-->
+            <if test="updateTime != null">
+                update_time =#{updateTime},
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+    <delete id="remove" parameterType="String">
+        delete from t_base_law_enforcement_team where id =#{id}
+    </delete>
+</mapper>

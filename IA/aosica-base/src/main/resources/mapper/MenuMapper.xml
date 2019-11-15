@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.MenuMapper">
+
+    <select id="selectAuthAllMenu" parameterType="String" resultType="com.aoscia.base.dto.MeunDto">
+         SELECT
+            ifnull(m.id, "")         AS                   id,
+            ifnull(m.name, "")       AS                    name,
+            ifnull(m.url, "")        AS                   url,
+            ifnull(m.parent_id, "")  AS                   parentId,
+            ifnull(m.icon, "")       AS                   icon,
+            ifnull(m.sort_num, "")  AS                   sortNum,
+            GROUP_CONCAT(DISTINCT rm.operation_authority) operationAuthority
+        FROM
+            t_basic_menu m
+            INNER JOIN t_base_role_menu rm ON rm.menu_id = m.id
+            INNER JOIN t_base_user_role ur ON ur.role_id = rm.role_id
+        WHERE
+            ur.user_id =#{userId}
+        GROUP BY
+            m.id,
+            m.name,
+            m.url,
+            m.parent_id,
+            m.icon,
+            m.sort_num
+        ORDER BY
+            m.sort_num
+    </select>
+
+    <insert id="insert" parameterType="com.aoscia.base.dto.MeunDto">
+    insert into t_basic_menu (id,name,url,parent_id,type,icon,sort_num,create_time,create_by)
+    values (#{id},#{name},#{url},#{parentId},#{type},#{icon},#{sortNum},#{createTime},#{createBy});
+    </insert>
+
+</mapper>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.FireWaterMapper">
+
+  <!--  根据查询对象，查询水源列表数据-->
+  <select id="queryList"  resultType="com.aoscia.base.dto.FireWaterDto" parameterType="com.aoscia.base.dto.FireWaterDto">
+      select
+      ifnull(tbf.id, "")                            id,
+      ifnull(tbf.type, "")                          type,
+      ifnull(tbf.number, "")                        number,
+      ifnull(tbf.water_level, "")                   waterLevel,
+      ifnull(tbf.water_capacity, "")                waterCapacity,
+      ifnull(tbf.file_number, "")                   fileNumber,
+      ifnull(tbf.manager, "")                       manager,
+      ifnull(tbf.mobile, "")                        mobile,
+      ifnull(tbf.management_unit, "")               managementUnit,
+      (select d.name from t_base_area d where d.code = tbf.belong_area) AS areaName,
+      ifnull(tbf.longitude, "")                     longitude,
+      ifnull(tbf.latitude, "")                      latitude,
+      ifnull(tbf.location, "")                      location,
+      ifnull(tbf.service_name, "")                  serviceName,
+      <!--  /*ifnull(tbf.building_no, "")                   buildingNo,*/ -->
+      ifnull(tbf.project_id, "")                    projectId
+      from t_base_fire_fighting_water tbf
+      <where>
+          <if test="number != null and number !=''">
+              tbf.number  like CONCAT ("%",#{number},"%")
+          </if>
+          <if test="type != null and type != 0">
+              and  tbf.type =#{type}
+          </if>
+      </where>
+      order by tbf.create_time desc
+
+  </select>
+
+
+
+    <!--  根据ID，查询水源详细数据-->
+    <select id="queryById" parameterType="String" resultType="com.aoscia.base.dto.FireWaterDto">
+        select
+        ifnull(tbf.id, "")                            id,
+        ifnull(tbf.type, "")                          type,
+        ifnull(tbf.number, "")                        number,
+        ifnull(tbf.water_level, "")                   waterLevel,
+        ifnull(tbf.water_capacity, "")                waterCapacity,
+        ifnull(tbf.file_number, "")                   fileNumber,
+        ifnull(tbf.manager, "")                       manager,
+        ifnull(tbf.mobile, "")                        mobile,
+        ifnull(tbf.management_unit, "")               managementUnit,
+
+        (select d.name from t_base_area d where d.code = tbf.belong_area) AS areaName,
+        ifnull(tbf.longitude, "")                     longitude,
+        ifnull(tbf.latitude, "")                      latitude,
+        ifnull(tbf.location, "")                      location,
+        ifnull(tbf.service_name, "")                  serviceName,
+         ifnull(tbf.project_id, "")                    projectId
+        from t_base_fire_fighting_water tbf where id =#{id}
+    </select>
+
+    <!--  插入水源数据-->
+    <insert id="insert" parameterType="com.aoscia.base.dto.FireWaterDto">
+        insert into t_base_fire_fighting_water
+        (id,type,number,water_level,water_capacity,file_number,
+        manager,mobile,belong_area,management_unit,longitude,latitude,
+        location,service_name,project_id,create_time
+        )values (
+        #{id},#{type},#{number},#{waterLevel},#{waterCapacity},#{fileNumber},#{manager},#{mobile},
+        #{belongArea},#{managementUnit},#{longitude},#{latitude},#{location},#{serviceName},#{projectId},#{createTime}
+        )
+    </insert>
+
+    <!-- 更新水源数据-->
+    <update id="update" parameterType="com.aoscia.base.dto.FireWaterDto">
+        update t_base_fire_fighting_water
+        <set>
+            <if test="type !=null and type != 0">
+                type =#{type},
+            </if>
+            <if test="number !=null and number != ''">
+                number =#{number},
+            </if>
+            <if test="waterLevel !=null and waterLevel != ''">
+                water_level =#{waterLevel},
+            </if>
+            <if test="waterCapacity !=null and waterCapacity != ''">
+                water_capacity =#{waterCapacity},
+            </if>
+            <if test="fileNumber !=null and fileNumber != ''">
+                file_number =#{fileNumber},
+            </if>
+            <if test="manager !=null and manager != ''">
+                manager =#{manager},
+            </if>
+            <if test="mobile !=null and mobile != ''">
+                mobile =#{mobile},
+            </if>
+            <if test="belongArea != null and belongArea != ''">
+                belong_area =#{belongArea},
+            </if>
+            <if test="longitude != null and longitude != ''">
+                longitude =#{longitude},
+            </if>
+            <if test="latitude != null and latitude != ''">
+                latitude =#{latitude},
+            </if>
+            <if test="location != null and location != ''">
+                location =#{location},
+            </if>
+            <if test="managementUnit != null and managementUnit != ''">
+                management_unit =#{managementUnit},
+            </if>
+            <if test="serviceName != null and serviceName != ''">
+                service_name =#{serviceName},
+            </if>
+            <if test="projectId != null and projectId != ''">
+                project_id =#{projectId},
+            </if>
+            <if test="updateTime != null">
+                update_time =#{updateTime},
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+    <!--  删除水源数据-->
+    <delete id="remove" parameterType="String">
+        delete from t_base_fire_fighting_water where id =#{id}
+    </delete>
+
+
+</mapper>

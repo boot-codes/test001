@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aosica.user.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.aosica.user.entity.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="user_role_id" jdbcType="BIGINT" property="userRoleId" />
+    <result column="user_role_name" jdbcType="VARCHAR" property="userRoleName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="login_ip" jdbcType="VARCHAR" property="loginIp" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+
+
+
+
+
+  <sql id="Base_Column_List">
+    id, account, salt, password, real_name, phone, email, project_id, user_role_id, user_role_name,
+    create_time, last_login_time, login_ip, status
+  </sql>
+
+
+  <select id="getUserByAccount"  resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from t_user
+    <where>
+        <if test="account != null and account !='' ">
+           account = #{account}
+        </if>
+    </where>
+    limit 1
+  </select>
+
+
+
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+<!--    select -->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_user-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </select>-->
+
+
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">-->
+<!--    delete from t_user-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </delete>-->
+
+
+
+
+  <!--  创建用户的-->
+  <insert id="save" parameterType="com.aosica.user.entity.User">
+    insert into t_user (id, account, salt, 
+      password, real_name, phone,
+      email, project_id, user_role_id, 
+      user_role_name, create_time, last_login_time, 
+      login_ip, status)
+    values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{userRoleId,jdbcType=BIGINT}, 
+      #{userRoleName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{loginIp,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+
+
+
+
+
+
+
+<!--  <update id="updateByPrimaryKeySelective" parameterType="com.aosica.user.entity.User">-->
+<!--    update t_user-->
+<!--    <set>-->
+<!--      <if test="account != null">-->
+<!--        account = #{account,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="salt != null">-->
+<!--        salt = #{salt,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="password != null">-->
+<!--        password = #{password,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="realname != null">-->
+<!--        realName = #{realname,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="phone != null">-->
+<!--        phone = #{phone,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="email != null">-->
+<!--        email = #{email,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="projectId != null">-->
+<!--        project_id = #{projectId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="userRoleId != null">-->
+<!--        user_role_id = #{userRoleId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="userRoleName != null">-->
+<!--        user_role_name = #{userRoleName,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="createTime != null">-->
+<!--        create_time = #{createTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="lastLoginTime != null">-->
+<!--        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="loginIp != null">-->
+<!--        login_ip = #{loginIp,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="status != null">-->
+<!--        status = #{status,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </update>-->
+
+
+
+
+
+</mapper>

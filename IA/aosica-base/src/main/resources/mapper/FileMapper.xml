@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.FileMapper">
+
+    <insert id="batchSave" parameterType="com.aoscia.base.entity.FileEntity">
+        insert into ai_file (id,name,type,path,size,bill_id,create_time) values
+        <foreach collection="list" item="item" open="" separator="," close="">
+            (#{item.id},#{item.name},#{item.type},#{item.path},#{item.size},#{item.billId},#{item.createTime})
+        </foreach>
+    </insert>
+
+    <select id="selectPathByBillId" parameterType="long" resultType="String">
+        select path from ai_file where bill_id =#{billId}
+    </select>
+
+    <select id="listFileByBillId" parameterType="long" resultType="com.aoscia.base.entity.FileEntity">
+        select id,name,type,path,size from ai_file where bill_id =#{billId}
+    </select>
+</mapper>

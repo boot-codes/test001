@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aosica.lot.mapper.FireFightingDeviceMapper">
+  <resultMap id="BaseResultMap" type="com.aosica.lot.entity.FireFightingDevice">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="system_type" jdbcType="VARCHAR" property="systemType" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="device_id" jdbcType="BIGINT" property="deviceId" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="install_location" jdbcType="VARCHAR" property="installLocation" />
+    <result column="building_id" jdbcType="BIGINT" property="buildingId" />
+    <result column="building_name" jdbcType="VARCHAR" property="buildingName" />
+    <result column="install_floor" jdbcType="INTEGER" property="installFloor" />
+    <result column="associated_unit_id" jdbcType="BIGINT" property="associatedUnitId" />
+    <result column="associated_unit_name" jdbcType="VARCHAR" property="associatedUnitName" />
+    <result column="supervision_unit_id" jdbcType="BIGINT" property="supervisionUnitId" />
+    <result column="supervision_unit_name" jdbcType="VARCHAR" property="supervisionUnitName" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="creater" jdbcType="BIGINT" property="creater" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="updater" jdbcType="BIGINT" property="updater" />
+    <result column="statue" jdbcType="INTEGER" property="statue" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    id, project_id, system_type, device_type, device_id, longitude, latitude, install_location,
+    building_id, building_name,install_floor, associated_unit_id, supervision_unit_id, parent_id,create_date,
+    creater, update_date, updater, statue
+  </sql>
+
+
+  <insert id="insert" parameterType="com.aosica.lot.entity.FireFightingDevice">
+    insert into t_fire_fighting_device (id, project_id, system_type,
+      device_type, device_id, longitude,
+      latitude, install_location, building_id,building_name,
+      install_floor, associated_unit_id, supervision_unit_id, parent_id,
+      create_date, creater, update_date,
+      updater, statue)
+    values (#{id,jdbcType=BIGINT}, #{projectId,jdbcType=BIGINT}, #{systemType,jdbcType=VARCHAR},
+      #{deviceType,jdbcType=VARCHAR}, #{deviceId,jdbcType=BIGINT}, #{longitude,jdbcType=VARCHAR},
+      #{latitude,jdbcType=VARCHAR}, #{installLocation,jdbcType=VARCHAR},#{buildingId,jdbcType=BIGINT},#{buildingName,jdbcType=VARCHAR},
+      #{installFloor,jdbcType=INTEGER}, #{associatedUnitId,jdbcType=BIGINT}, #{supervisionUnitId,jdbcType=BIGINT},
+      #{parentId,jdbcType=BIGINT},
+      #{createDate,jdbcType=TIMESTAMP}, #{creater,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP},
+      #{updater,jdbcType=BIGINT}, #{statue,jdbcType=INTEGER})
+  </insert>
+
+
+  <!--  根据查询对象，查询数据-->
+  <select id="getByCondition"  resultType="com.aosica.lot.dto.DeviceSystemTypeDto" parameterType="com.aosica.lot.dto.FireFightingDeviceQueryDto">
+    select
+      id, system_type as systemType, device_type as deviceType, device_id as deviceId
+      , building_name as buildingName,associated_unit_name as associatedUnit,  install_location as installLocation
+      ,statue,update_date
+
+    from t_fire_fighting_device
+    where
+        project_id =#{dto.projectId}
+
+      <if test="dto.id != null">
+        and id = #{dto.id}
+      </if>
+
+      <if test="dto.deviceId != null and dto.deviceId !='' ">
+          and device_id =#{dto.deviceId}
+      </if>
+
+        <if test="dto.deviceType != null and dto.deviceType !='' ">
+            and device_type = #{dto.deviceType}
+        </if>
+
+      <if test="dto.systemType != null and dto.systemType !='' ">
+        and system_type = #{dto.systemType}
+      </if>
+
+<!--      <if test="dto.buildingId !=null ">-->
+<!--        and building_id = #{dto.buildingId}-->
+<!--      </if>-->
+
+        <if test="dto.buildingName !=null and dto.buildingName !=''  ">
+            and building_name like  '%${dto.buildingName}%'
+        </if>
+
+        <if test="dto.supervisionUnitName != null and dto.supervisionUnitName !='' ">
+            and supervision_unit_name like '%${dto.supervisionUnitName}%'
+        </if>
+
+        <if test="dto.statue != null and dto.statue !='' ">
+            and statue =#{dto.statue}
+        </if>
+
+      <if test="dto.fbk != null">
+         and id in (${dto.fbk})
+      </if>
+
+  </select>
+
+<!--  <select id="selectByExample" parameterType="com.aosica.lot.entity.TFireFightingDeviceExample" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <if test="distinct">-->
+<!--      distinct-->
+<!--    </if>-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_fire_fighting_device-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--    <if test="orderByClause != null">-->
+<!--      order by ${orderByClause}-->
+<!--    </if>-->
+<!--  </select>-->
+
+
+
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">-->
+<!--    select -->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_fire_fighting_device-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </select>-->
+<!--  -->
+
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">-->
+<!--    delete from t_fire_fighting_device-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </delete>-->
+<!--  <delete id="deleteByExample" parameterType="com.aosica.lot.entity.TFireFightingDeviceExample">-->
+<!--    delete from t_fire_fighting_device-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </delete>-->
+
+
+
+
+   <!--  按项目工程统计，统计某个工程下，设备系统的数据，设备的总数量，不正常的设备数量 -->
+    <select id="deviceStatueNumByProjectStatistics"
+            parameterType="com.aosica.lot.dto.DeviceStatisticsDto"
+            resultType="com.aosica.lot.dto.DeviceSystemTypeNumStatisticsDTO">
+
+      SELECT
+
+        <if test="dto.queryType ==1">
+            building_name as buildingName ,
+        </if>
+
+      <if test="dto.queryType==2">
+         system_type as systemType ,
+      </if>
+       count(system_type) as systemTypeNum
+      ,count(id)as deviceNum
+      ,count(CASE WHEN statue=1  THEN 1 END)as normalDeviceNum
+      ,count(CASE WHEN statue  <![CDATA[ <> ]]> 1  THEN 1 END)as exceptionDeviceNum
+      from
+          t_fire_fighting_device
+      where
+          project_id = #{dto.projectId}
+
+    <if test="dto.buildingName != null">
+        and building_name like '%${dto.buildingName}%'
+    </if>
+
+
+      <if test="dto.queryType == 1">
+        GROUP BY building_name
+      </if>
+
+      <if test="dto.queryType == 2">
+        GROUP BY system_type
+      </if>
+
+
+
+    </select>
+
+
+
+
+  <!--  物联监控数据统计 设备状态数量统计 -->
+  <select id="deviceStatueCount" resultType="com.aosica.lot.dto.DeviceStatueDto" >
+        SELECT
+        statue as deviceStatue
+        ,count(statue) as num
+        from
+            t_fire_fighting_device
+        where
+            project_id=#{dto.projectId}
+            <if test="dto.systemType !=null ">
+                and system_type=#{dto.systemType}
+            </if>
+        GROUP BY statue
+        order by count(statue) desc
+  </select>
+
+
+
+  <!-- 按月统计 异常设备的数量 -->
+  <select id="deviceStatueCountByMonth" resultType="com.aosica.lot.dto.DeviceStatueDto">
+
+    SELECT
+--        DAY(create_date) as dd
+      date_format(create_date, '%Y-%m-%d' ) AS dateTimeStr
+      ,statue
+       ,count(statue)
+       from
+           t_fire_fighting_device
+      where
+          project_id=#{dto.projectId}
+          <if test="dto.systemType !=null ">
+            and system_type=#{dto.systemType}
+          </if>
+          and statue !=1
+          and create_date BETWEEN #{startDate} and #{endDate}
+      GROUP BY dateTimeStr ,statue
+      ORDER BY dateTimeStr
+  </select>
+
+
+  <!-- 按年统计 异常设备的数量 -->
+  <select id="deviceStatueCountByYear" resultType="com.aosica.lot.dto.DeviceStatueDto">
+    SELECT
+--     year(create_date) as yyear ,month(create_date) mmonth
+      date_format(create_date, '%Y-%m' ) AS dateTimeStr
+      ,statue as 'deviceStatue' ,count(statue)as 'num'
+    from
+        t_fire_fighting_device
+    where
+        project_id=#{dto.projectId}
+        <if test="dto.systemType !=null ">
+          and system_type=#{dto.systemType}
+        </if>
+        and statue !=1
+        and create_date BETWEEN #{startDate} and #{endDate}
+    GROUP BY dateTimeStr ,statue
+    ORDER BY dateTimeStr
+  </select>
+
+
+   <!-- 根据建筑物 ，获取该建筑物下的所有系统类型。-->
+    <select id="getSystemTypeByBuildId" resultType="com.aosica.lot.dto.SystemTypeDTO">
+
+        SELECT
+            DISTINCT system_type as 'systemTypeName'
+            from t_fire_fighting_device
+        where
+            project_id=#{projectId} and  building_id =#{buildingId}
+    </select>
+
+
+    <!--  设备异常报警记录 查询-->
+<!--  <select id="deviceAbnormalRecord" resultType="com.aosica.lot.dto.DeviceAbnormalRecordDto">-->
+
+
+
+<!--  </select>-->
+
+
+  <!--  根据 project id 和 system type 查询 -->
+<!--  <select id="getPageBySystemType" resultType="com.aosica.lot.dto.DeviceSystemTypeDto">-->
+
+<!--    select-->
+<!--        <include refid="Base_Column_List" />-->
+<!--    from t_device_system_type-->
+<!--      <where>-->
+<!--        <if test="projectId != null">-->
+<!--          project_id  = #{projectId}-->
+<!--        </if>-->
+<!--        <if test="systemType != null">-->
+<!--          device_type = #{systemType}-->
+<!--        </if>-->
+
+<!--    </where>-->
+
+<!--  </select>-->
+
+
+
+
+
+<!--  <select id="countByExample" parameterType="com.aosica.lot.entity.TFireFightingDeviceExample" resultType="java.lang.Long">-->
+<!--    select count(*) from t_fire_fighting_device-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </select>-->
+
+
+<!--  <update id="updateByExampleSelective" parameterType="map">-->
+<!--    update t_fire_fighting_device-->
+<!--    <set>-->
+<!--      <if test="record.id != null">-->
+<!--        id = #{record.id,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.projectId != null">-->
+<!--        project_id = #{record.projectId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.systemType != null">-->
+<!--        system_type = #{record.systemType,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.deviceName != null">-->
+<!--        device_name = #{record.deviceName,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.deviceId != null">-->
+<!--        device_id = #{record.deviceId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.longitude != null">-->
+<!--        longitude = #{record.longitude,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.latitude != null">-->
+<!--        latitude = #{record.latitude,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.installLocation != null">-->
+<!--        install_location = #{record.installLocation,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.buildingId != null">-->
+<!--        building_id = #{record.buildingId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="record.installFloor != null">-->
+<!--        install_floor = #{record.installFloor,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="record.associatedUnitId != null">-->
+<!--        associated_unit_id = #{record.associatedUnitId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.supervisionUnitId != null">-->
+<!--        supervision_unit_id = #{record.supervisionUnitId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.createDate != null">-->
+<!--        create_date = #{record.createDate,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="record.creater != null">-->
+<!--        creater = #{record.creater,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.updateDate != null">-->
+<!--        update_date = #{record.updateDate,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="record.updater != null">-->
+<!--        updater = #{record.updater,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="record.statue != null">-->
+<!--        statue = #{record.statue,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Update_By_Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </update>-->
+
+
+
+<!--  <update id="updateByExample" parameterType="map">-->
+<!--    update t_fire_fighting_device-->
+<!--    set id = #{record.id,jdbcType=BIGINT},-->
+<!--      project_id = #{record.projectId,jdbcType=BIGINT},-->
+<!--      system_type = #{record.systemType,jdbcType=VARCHAR},-->
+<!--      device_name = #{record.deviceName,jdbcType=VARCHAR},-->
+<!--      device_id = #{record.deviceId,jdbcType=BIGINT},-->
+<!--      longitude = #{record.longitude,jdbcType=VARCHAR},-->
+<!--      latitude = #{record.latitude,jdbcType=VARCHAR},-->
+<!--      install_location = #{record.installLocation,jdbcType=VARCHAR},-->
+<!--      building_id = #{record.buildingId,jdbcType=INTEGER},-->
+<!--      install_floor = #{record.installFloor,jdbcType=INTEGER},-->
+<!--      associated_unit_id = #{record.associatedUnitId,jdbcType=BIGINT},-->
+<!--      supervision_unit_id = #{record.supervisionUnitId,jdbcType=BIGINT},-->
+<!--      create_date = #{record.createDate,jdbcType=TIMESTAMP},-->
+<!--      creater = #{record.creater,jdbcType=BIGINT},-->
+<!--      update_date = #{record.updateDate,jdbcType=TIMESTAMP},-->
+<!--      updater = #{record.updater,jdbcType=BIGINT},-->
+<!--      statue = #{record.statue,jdbcType=INTEGER}-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Update_By_Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </update>-->
+
+
+
+<!--  <update id="updateByPrimaryKeySelective" parameterType="com.aosica.lot.entity.FireFightingDevice">-->
+<!--    update t_fire_fighting_device-->
+<!--    <set>-->
+<!--      <if test="projectId != null">-->
+<!--        project_id = #{projectId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="systemType != null">-->
+<!--        system_type = #{systemType,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="deviceName != null">-->
+<!--        device_name = #{deviceName,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="deviceId != null">-->
+<!--        device_id = #{deviceId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="longitude != null">-->
+<!--        longitude = #{longitude,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="latitude != null">-->
+<!--        latitude = #{latitude,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="installLocation != null">-->
+<!--        install_location = #{installLocation,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="buildingId != null">-->
+<!--        building_id = #{buildingId,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="installFloor != null">-->
+<!--        install_floor = #{installFloor,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--      <if test="associatedUnitId != null">-->
+<!--        associated_unit_id = #{associatedUnitId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="supervisionUnitId != null">-->
+<!--        supervision_unit_id = #{supervisionUnitId,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="createDate != null">-->
+<!--        create_date = #{createDate,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="creater != null">-->
+<!--        creater = #{creater,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="updateDate != null">-->
+<!--        update_date = #{updateDate,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="updater != null">-->
+<!--        updater = #{updater,jdbcType=BIGINT},-->
+<!--      </if>-->
+<!--      <if test="statue != null">-->
+<!--        statue = #{statue,jdbcType=INTEGER},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </update>-->
+
+
+
+<!--  <update id="updateByPrimaryKey" parameterType="com.aosica.lot.entity.FireFightingDevice">-->
+<!--    update t_fire_fighting_device-->
+<!--    set project_id = #{projectId,jdbcType=BIGINT},-->
+<!--      system_type = #{systemType,jdbcType=VARCHAR},-->
+<!--      device_name = #{deviceName,jdbcType=VARCHAR},-->
+<!--      device_id = #{deviceId,jdbcType=BIGINT},-->
+<!--      longitude = #{longitude,jdbcType=VARCHAR},-->
+<!--      latitude = #{latitude,jdbcType=VARCHAR},-->
+<!--      install_location = #{installLocation,jdbcType=VARCHAR},-->
+<!--      building_id = #{buildingId,jdbcType=INTEGER},-->
+<!--      install_floor = #{installFloor,jdbcType=INTEGER},-->
+<!--      associated_unit_id = #{associatedUnitId,jdbcType=BIGINT},-->
+<!--      supervision_unit_id = #{supervisionUnitId,jdbcType=BIGINT},-->
+<!--      create_date = #{createDate,jdbcType=TIMESTAMP},-->
+<!--      creater = #{creater,jdbcType=BIGINT},-->
+<!--      update_date = #{updateDate,jdbcType=TIMESTAMP},-->
+<!--      updater = #{updater,jdbcType=BIGINT},-->
+<!--      statue = #{statue,jdbcType=INTEGER}-->
+<!--    where id = #{id,jdbcType=BIGINT}-->
+<!--  </update>-->
+
+
+</mapper>

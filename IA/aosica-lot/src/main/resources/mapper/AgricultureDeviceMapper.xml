@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <mapper namespace="com.aosica.lot.mapper.AgricultureDeviceMapper">
+
+        <select id="selectById" parameterType="map" resultType="com.aosica.lot.dto.AgricultureDeviceDto">
+                SELECT
+                    IFNULL(aie.id,"")  id,
+                    IFNULL(aie.NAME,"")  NAME,
+                    IFNULL(aie.number,"")  number,
+                    IFNULL(aie.manufacturer,"")  manufacturer,
+                    IFNULL(aie.release_date,"")  releaseDate,
+                    IFNULL(aie.network_way,"")  networkWay,
+                    IFNULL(aie.access_way,"")  accessWay,
+                    IFNULL(aie.gateway_id,"")  gatewayId,
+                    IFNULL(aie.status,"")  `status`,
+                    IFNULL(sd.`name`,"")  typeName,
+                    IFNULL(aii.site,"")  site,
+                    IFNULL(aie.install_coordinate,"")  installCoordinate,
+                    IFNULL(aie.install_address,"") installAddress,
+                    IFNULL(aie.collection_frequency,"")  collectionFrequency,
+                    IFNULL(aie.collection_frequency_unit,"")  collectionFrequencyUnit,
+                    IFNULL(aie.illustrate ,"") `explain`
+                FROM
+                    t_agriculture_equipment aie
+                    LEFT JOIN t_agriculturesys_install_site aii ON aii.id = aie.site_id
+                    LEFT JOIN t_agriculturesys_sys_dict sd ON sd.`value` = aie.type AND sd.type = 'equipment_type'
+                 <where>
+                     <choose>
+                         <when test="type == 1">
+                             aie.id =#{id}
+                         </when>
+                         <otherwise>
+                             and aie.number =#{number}
+                             and aie.is_on_the_scene = 0
+                         </otherwise>
+                     </choose>
+                  </where>
+        </select>
+
+<select id="listAgricultureDevice" parameterType="map" resultType="com.aosica.lot.dto.AgricultureDeviceDto">
+     SELECT
+            IFNULL(aie.id,"")  id,
+            IFNULL(aie.NAME,"")  NAME,
+            IFNULL(aie.number,"")  number,
+            IFNULL(aie.manufacturer,"")  manufacturer,
+            IFNULL(aie.release_date,"")  releaseDate,
+            IFNULL(aie.network_way,"")  networkWay,
+            IFNULL(aie.access_way,"")  accessWay,
+            IFNULL(aie.gateway_id,"")  gatewayId,
+            IFNULL(aie.status,"")  `status`,
+            IFNULL(sd.`name`,"")  typeName,
+            IFNULL(aii.site,"")  site,
+            IFNULL(aie.install_coordinate,"")  installCoordinate,
+            IFNULL(aie.install_address,"") installAddress,
+            IFNULL(aie.collection_frequency,"")  collectionFrequency,
+            IFNULL(aie.collection_frequency_unit,"")  collectionFrequencyUnit,
+            IFNULL(aie.illustrate ,"") `explain`,
+            IFNULL(DATE_FORMAT(aie.update_time,'%Y-%m-%d %H:%i'),"")  updateTimeStr,
+            case
+                when aie.status = 1 then '在线'
+                when aie.status =2 then '故障'
+                when aie.status =3 then '离线'
+                when aie.status =4 then '报警'
+                end as statusStr
+                FROM
+                    t_agriculture_equipment aie
+                    LEFT JOIN t_agriculturesys_install_site aii ON aii.id = aie.site_id
+                    LEFT JOIN t_agriculturesys_sys_dict sd ON sd.`value` = aie.type AND sd.type = 'equipment_type'
+                <where>
+                    is_delete = 0
+                    and   aie.is_on_the_scene = 1
+                     <if test="name !=null and name !=''">
+                          and aie.name like CONCAT ("%",#{name,jdbcType=VARCHAR},"%")
+                     </if>
+                    <if test="status !=null and status !=0">
+                          and aie.status=#{status,jdbcType=INTEGER}
+                    </if>
+                    <if test="siteId !=null and siteId !=0">
+                        and aie.site_id=#{siteId}
+                    </if>
+                </where>
+                order by aie.update_time desc
+                limit #{startIndex},#{rowNum}
+</select>
+
+    <select id="listEquipmentCount" parameterType="map" resultType="Integer">
+        SELECT count(aie.id) as count
+        FROM
+        t_agriculture_equipment aie
+        LEFT JOIN t_agriculturesys_install_site aii ON aii.id = aie.site_id
+        LEFT JOIN t_agriculturesys_sys_dict sd ON sd.`value` = aie.type AND sd.type = 'equipment_type'
+        <where>
+            is_delete = 0
+            and  aie.is_on_the_scene = 1
+            <if test="name !=null and name !=''">
+             and aie.name like CONCAT ("%",#{name,jdbcType=VARCHAR},"%")
+            </if>
+            <if test="status !=null and status !=0">
+             and aie.status=#{status,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <insert id="save" parameterType="com.aosica.lot.dto.AgricultureDeviceDto">
+        insert into t_agriculturesys_equipment
+         (
+            id,name,number,manufacturer,release_date,network_way,access_way,gateway_id,status,is_on_the_scene,type
+            ,site_id,install_coordinate,install_address,collection_frequency,collection_frequency_unit
+            ,illustrate,create_time,is_delete
+        )
+        values (
+            #{id},#{name},#{number},#{manufacturer},#{releaseDate},#{networkWay},#{accessWay},#{gatewayId}
+            ,#{status},#{isOnTheScene},#{type},#{siteId},#{installCoordinate},#{installAddress},#{collectionFrequency}
+            ,#{collectionFrequencyUnit},#{explain},#{createTime},#{isDelete}
+        )
+    </insert>
+
+    <update id="update" parameterType="com.aosica.lot.dto.AgricultureDeviceDto">
+        update t_agriculture_equipment
+        <set>
+            <if test="manufacturer != null and manufacturer !=''">
+                manufacturer =#{manufacturer},
+            </if>
+            <if test="releaseDate != null and releaseDate !=''">
+                release_date =#{releaseDate},
+            </if>
+            <if test="networkWay != null and networkWay !=''">
+                network_way =#{networkWay},
+            </if>
+            <if test="accessWay != null and accessWay !=''">
+                access_way =#{accessWay},
+            </if>
+            <if test="gatewayId != null and gatewayId !=''">
+                gateway_id =#{gatewayId},
+            </if>
+            <if test="type != null and type !=''">
+                type =#{type},
+            </if>
+            <if test="status != null and status !=0 ">
+                status =#{status},
+            </if>
+            <if test="isOnTheScene != null ">
+                is_on_the_scene =#{isOnTheScene},
+            </if>
+            <if test="collectionFrequency != null and collectionFrequency !='' ">
+                collection_frequency =#{collectionFrequency},
+            </if>
+            <if test="collectionFrequencyUnit != null and collectionFrequencyUnit !='' ">
+                collection_frequency_unit =#{collectionFrequencyUnit},
+            </if>
+            <if test="explain != null and explain !=''">
+                explain =#{explain},
+            </if>
+            <if test="isDelete != null and isDelete !=0 ">
+                is_delete =#{isDelete},
+            </if>
+        </set>
+        where id =#{id}
+    </update>
+
+    <select id="listSite" resultType="com.aosica.common.vo.BaseVo">
+        select id,site as name from t_agriculturesys_install_site order by create_time desc
+    </select>
+
+    <insert id="batchSaveMetricalInfo" parameterType="com.aosica.lot.dto.AgricultureDeviceMetricalInfoDto">
+        insert into t_agriculturesys_equipment_metrical_information (id,equipment_id,name,range,theory,precision,warning_type,warning_value_min,warning_value_max,normal_value_min,,normal_value_max,create_time)
+        values
+        <foreach collection="list" item="item" open="" separator="," close="">
+            (
+            #{item.id},#{item.equipmentId},#{item.name},#{item.range},#{item.theory},#{item.precision},#{item.warningType},#{item.warningValueMin},#{item.warningValueMax},#{item.normalValueMin},#{item.normalValueMax},#{item.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <update id="batchUpdateMetricalInfo" parameterType="com.aosica.lot.dto.AgricultureDeviceMetricalInfoDto">
+        update t_agriculturesys_equipment_metrical_information
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="warning_value_min =case" suffix="end,">
+                <foreach collection="list" item="cus">
+                    <if test="cus.warningValueMin!=null">
+                        when id=#{cus.id} then #{cus.warningValueMin}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="warning_value_max =case" suffix="end,">
+                <foreach collection="list" item="cus">
+                    <if test="cus.warningValueMax!=null">
+                        when id=#{cus.id} then #{cus.warningValueMax}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        <where>
+            <foreach collection="list" separator="or" item="item">
+                id = #{item.id}
+            </foreach>
+        </where>
+    </update>
+
+    <select id="getMetricalWarning" parameterType="Long" resultType="com.aosica.lot.dto.AgricultureDeviceMetricalInfoDto">
+        select IFNULL(id,"") id,
+                IFNULL(name,"") name,
+               IFNULL(measurement_range,"") measurementRange,
+               IFNULL(theory,"") theory,
+               IFNULL(measurement_precision,"") measurementPrecision,
+               IFNULL(warning_type,"") warningType,
+               IFNULL(warning_value_min,"") warningValueMin,
+               IFNULL(warning_value_max,"") warningValueMax,
+               IFNULL(normal_value_min,"") normalValueMin,
+               IFNULL(normal_value_max,"") normalValueMax
+               FROM t_agriculturesys_equipment_metrical_information
+               WHERE equipment_id =#{equipmentId}
+    </select>
+
+    <select id="listHistoryData" parameterType="map" resultType="com.aosica.lot.dto.AgricultureDeviceHistoryDataDto">
+        select ifnull(aeh.collection_time,"") collectionTime,ifnull(aemi.name,"") warnName ,ifnull(aeh.value,"") value,
+        CONCAT(ifnull(aemi.normal_value_min,""),"~",ifnull(aemi.normal_value_max,"")) normalValue
+        FROM t_agriculturesys_equipment_history_data aeh
+        LEFT JOIN t_agriculturesys_equipment_metrical_information aemi ON  aemi.warning_type = aeh.value_type
+        <where>
+            <if test="equipmentId !=null and equipmentId !=''">
+                aeh.equipment_id =#{equipmentId}
+            </if>
+            <if test="warningType != null and warningType != 0 ">
+                and aeh.value_type =#{warningType}
+            </if>
+            <if test="startDate != null and startDate != '' ">
+            <![CDATA[
+              and STR_TO_DATE(aeh.collection_time,'%Y-%m-%d %H:%i:%s') >=#{startDate}
+                ]]>
+            </if>
+            <if test="endDate != null and endDate != ''">
+                <![CDATA[
+                and STR_TO_DATE(aeh.collection_time,'%Y-%m-%d %H:%i:%s') <= #{endDate}
+                 ]]>
+             </if>
+        </where>
+        order by aeh.collection_time desc
+        limit #{startIndex},#{rowNum}
+    </select>
+
+    <select id="listCountHistoryData" parameterType="map" resultType="Integer">
+        select count(aeh.id) count
+        FROM t_agriculturesys_equipment_history_data aeh
+        LEFT JOIN t_agriculturesys_equipment_metrical_information aemi ON  aemi.warning_type = aeh.value_type
+        <where>
+            <if test="equipmentId !=null and equipmentId !=''">
+                aeh.equipment_id =#{equipmentId}
+            </if>
+            <if test="warningType != null and warningType != 0 ">
+                and aeh.value_type =#{warningType}
+            </if>
+            <if test="startDate != null and startDate != '' ">
+                <![CDATA[
+                and aeh.collection_time >= #{startDate}
+                ]]>
+            </if>
+            <if test="endDate != null and endDate != ''">
+                <![CDATA[
+                and aeh.collection_time <= #{endDate}
+                 ]]>
+            </if>
+        </where>
+    </select>
+
+    <select id="getCollectionTime" parameterType="Long" resultType="String">
+            select collection_time as collectionTime
+            from  t_agriculturesys_equipment_history_data
+            where  equipment_id = #{equipmentId}
+            ORDER BY collection_time desc LIMIT 1
+        </select>
+
+    <select id="getCountGruopByStatus"  parameterType="map" resultType="map">
+        SELECT  COUNT(id) as count,
+        case
+        when status =1 then '在线'
+        when status =2 then '故障'
+        when status =3 then '离线'
+        when status =4 then '报警'
+        end as statusStr,
+            status,
+        DATE_FORMAT(update_time,'%Y-%m-%d %H:%i:%m') as  statisticalTime
+         from
+        t_agriculturesys_equipment
+        <choose>
+            <when test="type == 1">
+                where
+                 site_id =#{siteId}
+            </when>
+        </choose>
+         GROUP BY `status`
+     </select>
+
+    <select id="listOperation" resultType="com.aosica.lot.dto.LogDto">
+      SELECT  aie.number as number,aie.`name` as name, aie.install_address as installAddress,
+            ail.type as type , DATE_FORMAT(ail.create_time,'%Y-%m-%d %H:%i:%s') as operTime ,
+            ail.result as result,ail.illustrate as `explain`,ail.operation_by as operationBy
+      from  t_agriculturesys_equipment aie
+      INNER JOIN  t_agriculturesys_log ail on ail.bill_id = aie.id
+        <where>
+            <if test="name != null and name !=''">
+                aie.name like CONCAT ("%",#{name,jdbcType=VARCHAR},"%")
+            </if>
+            <if test="startDate != null and startDate != ''">
+                <![CDATA[
+              and DATE_FORMAT(ail.create_time,'%Y-%m-%d %H:%i:%s') >=#{startDate}
+               ]]>
+            </if>
+            <if test="endDate != null and endDate != ''">
+                <![CDATA[
+                and DATE_FORMAT(ail.create_time,'%Y-%m-%d %H:%i:%s') <= #{endDate}
+                 ]]>
+            </if>
+        </where>
+      limit #{startIndex},#{rowNum}
+    </select>
+
+    <select id="listOperationCount" resultType="Integer">
+         SELECT count(aie.id) as count
+      from  t_agriculturesys_equipment aie
+      INNER JOIN  t_agriculturesys_log ail on ail.bill_id = aie.id
+      LEFT JOIN t_agriculturesys_install_site ais ON ais.id = aie.site_id
+    </select>
+
+    <select id="selectByAgricultureDeviceId" parameterType="long" resultType="com.aosica.lot.dto.AgricultureDeviceErrorDto">
+        select id,error_value as errorValue ,error_name as errorName,collection_time as collectionTime
+        from t_agriculturesys_equipment_warn_data where error_type =4
+        order by collection_time desc limit 1
+    </select>
+
+    <select id="selectErrorData" parameterType="long" resultType="map">
+      select  ifnull(aer.error_type,0) errorType,ifnull(aer.error_name,"") errorName ,
+              ifnull(aer.error_value,"") errorValue,
+              ifnull(aer.error_reason,"") errorReason ,ifnull(aer.collection_time,"") collectionTime,
+              ifnull(ae.name,"") name ,ifnull(ae.number,"") number ,ifnull(ae.install_address,"") installAddress,
+              CONCAT(ifnull(aem.warning_value_min,""),"",ifnull(aem.warning_value_max,"")) warnValue,
+              case
+              when  aer.error_type =2
+              then 'malfunction'
+              when aer.error_type =3
+              then 'offline'
+              when aer.error_type =4
+              then 'warning'
+              end as typeStr
+	  FROM t_agriculturesys_equipment_error_data aer
+	  LEFT JOIN t_agriculturesys_equipment ae on ae.id= aer.equipment_id
+	  LEFT JOIN t_agriculturesys_equipment_metrical_information aem ON aem.equipment_id = aer.equipment_id
+	   where
+	     ae.site_id=#{siteId}
+	   GROUP BY error_type
+	   ORDER BY aer.collection_time desc
+    </select>
+
+    <select id="getRealTimeData" parameterType="map" resultType="map">
+    select ifnull(aeh.collection_time,"") collectionTime,ifnull(aemi.name,"") warnName ,ifnull(aeh.value,"") value,
+        ifnull(aemi.unit,"")  unit
+    FROM t_agriculturesys_equipment_history_data aeh
+    LEFT JOIN t_agriculturesys_equipment_metrical_information aemi ON  aemi.warning_type = aeh.value_type
+    LEFT JOIN t_agriculturesys_equipment ae on ae.id= aeh.equipment_id
+        <where>
+            <if test="siteId != null and siteId !=''">
+            ae.site_id=#{siteId}
+            </if>
+            <if test="startDate != null and startDate !=''">
+            and STR_TO_DATE(collection_time,'%Y-%m-%d') =#{startDate}
+            </if>
+        </where>
+	GROUP BY aeh.collection_time
+	order by aeh.collection_time desc
+    </select>
+
+
+    <select id="getWarnHandel" parameterType="map" resultType="map">
+  select  COUNT(aer.error_type) as count,ifnull(error_name,"") errorTypeStr
+        FROM t_agriculturesys_equipment_error_data aer
+        LEFT JOIN t_agriculturesys_equipment ae on ae.id= aer.equipment_id
+        <where>
+            error_type = 4
+            and is_handle = 1
+            and
+            ae.site_id=#{siteId}
+            <if test="startDate != null and startDate != ''">
+            <![CDATA[
+              and STR_TO_DATE(collection_time,'%Y-%m-%d %H:%i:%s') >=#{startDate}
+               ]]>
+              </if>
+             <if test="endDate != null and endDate != ''">
+                    <![CDATA[
+                and STR_TO_DATE(collection_time,'%Y-%m-%d %H:%i:%s') <= #{endDate}
+                 ]]>
+             </if>
+        </where>
+	   GROUP BY error_name
+	   ORDER BY aer.collection_time desc
+    </select>
+
+    <select id="getWarnList" parameterType="map" resultType="com.aosica.lot.dto.AgricultureDeviceErrorDto">
+      SELECT  aer.id as id,ae.name as name,ae.number as number ,ae.install_address as installAdress,
+        <choose>
+            <when test="type == 1 ">
+                aer.error_name as errorName,
+            </when>
+            <when test="type == 2 ">
+                aer.error_reason as errorName,
+            </when>
+        </choose>
+      aer.collection_time as collectionTime,
+      ae.manufacturer as manufacturer,
+      ae.release_date as releaseDate,
+      sd.`name` as   typeName,
+      aii.site as  site,
+      ae.install_coordinate as installCoordinate
+      from t_agriculturesys_equipment_error_data aer
+      LEFT JOIN t_agriculturesys_equipment ae on ae.id = aer.equipment_id
+      LEFT JOIN t_agriculturesys_sys_dict sd ON sd.`value` = ae.type AND sd.type = 'equipment_type'
+        LEFT JOIN t_agriculturesys_install_site aii ON aii.id = ae.site_id
+      where
+        is_handle in (0,3)
+        <choose>
+            <when test="type == 1">
+               and  aer.error_type =4
+            </when>
+            <when test="type == 2">
+                and aer.error_type = 2
+            </when>
+            <when test="type == 3">
+                and aer.error_type = 3
+            </when>
+        </choose>
+    </select>
+
+    <update id="updateWarn" parameterType="com.aosica.lot.dto.AgricultureDeviceErrorDto">
+        update t_agriculturesys_equipment_error_data set is_handle =#{isHandel},handel_result =#{handelResult} where id =#{id}
+    </update>
+
+    <select id="getWeatherWarn" parameterType="String" resultType="map">
+        select head,alarm_time as alarmTime from t_agriculturesys_territory_alarm
+    </select>
+
+    <select id="getRealTimeWarnDate" parameterType="String" resultType="map">
+    SELECT
+	  ifnull( ae.NAME, "" ) NAME,
+	  ifnull( ae.number, "" ) number,
+	  ifnull( ae.install_address, "" ) installAddress,
+	  ifnull( aer.error_name, "" ) errorName,
+	  ifnull( aer.collection_time, "" ) collectionTime
+    FROM
+	  t_agriculturesys_equipment_error_data aer
+	  LEFT JOIN t_agriculturesys_equipment ae ON ae.id = aer.equipment_id
+  WHERE
+	aer.error_type = 4
+	and STR_TO_DATE(aer.collection_time,'%Y-%m-%d') = #{startDate}
+  ORDER BY
+	aer.collection_time DESC
+    </select>
+
+    <select id="getWarnStaBar" parameterType="map" resultType="map">
+        SELECT count(id) count ,error_name as errorName
+        from   t_agriculturesys_equipment_error_data
+        <where>
+            error_type = 4
+            <if test="startDate != null and startDate != ''">
+                <![CDATA[
+              and STR_TO_DATE(collection_time,'%Y-%m-%d') >=#{startDate}
+               ]]>
+            </if>
+            <if test="endDate != null and endDate != ''">
+                <![CDATA[
+                and STR_TO_DATE(collection_time,'%Y-%m-%d') <= #{endDate}
+                 ]]>
+            </if>
+        </where>
+        GROUP BY error_name
+    </select>
+
+    <select id="getWarnCountLineChart" parameterType="map" resultType="map">
+        SELECT count(id) count ,STR_TO_DATE(collection_time,'%Y-%m-%d') as collectionTime
+        from   t_agriculturesys_equipment_error_data
+        <where>
+         error_type = 4
+        <if test="startDate != null and startDate != ''">
+            <![CDATA[
+              and STR_TO_DATE(collection_time,'%Y-%m-%d') >=#{startDate}
+               ]]>
+        </if>
+        <if test="endDate != null and endDate != ''">
+            <![CDATA[
+                and STR_TO_DATE(collection_time,'%Y-%m-%d') <= #{endDate}
+                 ]]>
+        </if>
+      </where>
+        GROUP BY STR_TO_DATE(collection_time,'%Y-%m-%d')
+    </select>
+
+
+    <select id="getWarnByErrorType" parameterType="map" resultType="Integer">
+        select  count(aer.id) as total
+        FROM t_agriculturesys_equipment_error_data aer
+        LEFT JOIN t_agriculturesys_equipment ae on ae.id= aer.equipment_id
+        <where>
+            aer.error_type = 4
+            and
+            ae.site_id=#{siteId}
+            and
+            aer.error_name = #{errorName}
+            <if test="startDate != null and startDate != ''">
+                <![CDATA[
+              and STR_TO_DATE(aer.collection_time,'%Y-%m-%d %H:%i:%s') >=#{startDate}
+               ]]>
+            </if>
+            <if test="endDate != null and endDate != ''">
+                <![CDATA[
+                and STR_TO_DATE(aer.collection_time,'%Y-%m-%d %H:%i:%s') <= #{endDate}
+                 ]]>
+            </if>
+        </where>
+    </select>
+
+
+
+    <select id="getRealTimeAvg" parameterType="map" resultType="map">
+         select ifnull(aeh.collection_time,"") collectionTime,ifnull(avg(aeh.value),0) avgValue
+    FROM t_agriculturesys_equipment_history_data aeh
+    <where>
+        <if test="startDate != null and startDate != ''">
+            <![CDATA[
+               STR_TO_DATE(aeh.collection_time,'%Y-%m-%d') >=#{startDate}
+               ]]>
+        </if>
+        <if test="endDate != null and endDate != ''">
+            <![CDATA[
+                and STR_TO_DATE(aeh.collection_time,'%Y-%m-%d') <= #{endDate}
+                 ]]>
+        </if>
+        <if test="valueType != null and valueType != 0 ">
+                and aeh.value_type = #{valueType}
+        </if>
+    </where>
+    GROUP BY  STR_TO_DATE(aeh.collection_time,'%Y-%m-%d')
+	order by aeh.collection_time desc
+    </select>
+
+
+
+    <select id="getAllMonitorName" resultType="map">
+      select aemi.warning_type as warningType ,sd.code as code,aemi.name as name
+      from t_agriculturesys_equipment_metrical_information aemi
+      left join t_agriculturesys_sys_dict sd on sd.`value` = aemi.warning_type AND sd.type = 'monitoring_items'
+    </select>
+
+
+</mapper>

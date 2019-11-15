@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.DictMapper">
+
+    <insert id="insert" parameterType="com.aoscia.base.dto.DictDto">
+            insert into sys_dict (id,type,name,value) values (#{id},#{type},#{name},#{value});
+    </insert>
+
+    <select id="get" parameterType="java.lang.String" resultType="com.aoscia.base.dto.DictDto">
+        select id from sys_dict where mobile=#{account} or email=#{account}
+    </select>
+
+    <update id="update" parameterType="com.aoscia.base.dto.DictDto">
+        update sys_dict
+        <set>
+            <if test="name!= null and name != '' ">
+                name = #{name},
+            </if>
+        </set>
+        <where>
+            <if test="id !=null and id !=''">
+                id=#{id}
+            </if>
+        </where>
+    </update>
+
+    <select id="selectById">
+        select id from sys_dict where id=#{id}
+    </select>
+
+    <select id="getList" resultType="com.aoscia.base.dto.DictDto" parameterType="map">
+        <include refid="getList"></include>
+    </select>
+
+    <sql id="getList">
+        select id from
+        sys_dict m
+        where 1=1
+        <if test="name!= null and name != ''">
+            and name = #{name}
+        </if>
+    </sql>
+
+
+    <select id="getListCount" resultType="Integer" parameterType="map">
+        select count(1) from (<include refid="getList"></include>) tab
+    </select>
+
+    <delete id="delete">
+        delete from sys_dict where 1=1
+        and id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="getById">
+        select id,type,name,value from sys_dict
+        where 1=1
+        <if test="type!= null and type != ''">
+            and type = #{type}
+        </if>
+    </select>
+
+</mapper>

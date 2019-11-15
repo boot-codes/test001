@@ -1,0 +1,189 @@
+16:44:17.195 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+16:47:02.128 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+16:48:43.111 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+16:48:44.994 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+16:48:45.042 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+16:50:59.018 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+16:51:00.870 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+16:51:00.897 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+16:52:21.004 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+16:52:23.035 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+16:52:23.072 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+16:53:32.223 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+16:53:33.989 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+16:53:34.014 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+16:54:33.917 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+16:54:35.690 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+16:54:35.716 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+16:55:24.977 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+16:55:26.784 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+16:55:26.810 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+16:55:27.904 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+16:55:29.649 [main] INFO  c.a.a.AgricultureApplication[logStarted] - Started AgricultureApplication in 6.613 seconds (JVM running for 7.171)
+17:58:46.355 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+17:58:48.160 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+17:58:48.186 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+18:00:17.399 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+18:00:19.163 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+18:00:19.188 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+18:00:20.100 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+18:00:21.313 [main] INFO  c.a.a.AgricultureApplication[logStarted] - Started AgricultureApplication in 5.861 seconds (JVM running for 6.409)
+19:29:55.687 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:29:57.468 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:29:57.494 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:29:58.476 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+19:29:59.731 [main] INFO  c.a.a.AgricultureApplication[logStarted] - Started AgricultureApplication in 6.025 seconds (JVM running for 6.578)
+19:36:51.663 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:36:53.515 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:36:53.543 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:36:54.533 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+19:40:07.840 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:40:09.666 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:40:09.692 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:40:10.685 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+19:41:17.469 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:41:19.232 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:41:19.258 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:41:42.246 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:41:44.025 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:41:44.051 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:41:44.968 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+19:41:46.210 [main] INFO  c.a.a.AgricultureApplication[logStarted] - Started AgricultureApplication in 5.922 seconds (JVM running for 6.484)
+19:42:05.879 [http-nio-8089-exec-1] ERROR c.a.a.service.WebSocketService[sendMessage] - 没有找到你指定ID的会话：none
+19:43:35.861 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:43:35.864 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:44:01.432 [http-nio-8089-exec-9] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:44:01.437 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:44:01.438 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:45:17.921 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：2
+19:45:17.921 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:46:27.925 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:46:29.731 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:46:29.757 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:46:30.670 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+19:46:31.996 [main] INFO  c.a.a.AgricultureApplication[logStarted] - Started AgricultureApplication in 6.047 seconds (JVM running for 6.6)
+19:46:40.823 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:46:40.827 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:47:32.819 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:47:34.657 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:47:34.684 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:47:35.591 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+19:47:36.910 [main] INFO  c.a.a.AgricultureApplication[logStarted] - Started AgricultureApplication in 6.029 seconds (JVM running for 6.578)
+19:47:41.941 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:47:41.944 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:48:52.533 [http-nio-8089-exec-5] ERROR c.a.a.service.WebSocketService[onError] - 发生错误：远程主机强迫关闭了一个现有的连接。，session ID： 0
+19:48:52.535 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:48:59.339 [http-nio-8089-exec-6] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:48:59.340 [http-nio-8089-exec-6] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:49:03.840 [http-nio-8089-exec-9] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:49:03.855 [http-nio-8089-exec-10] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:49:03.857 [http-nio-8089-exec-10] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:50:43.622 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:50:45.420 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:50:45.446 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:50:46.348 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+19:50:47.658 [main] INFO  c.a.a.AgricultureApplication[logStarted] - Started AgricultureApplication in 5.976 seconds (JVM running for 6.534)
+19:50:54.728 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:50:54.732 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:51:43.439 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:51:45.210 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:51:45.237 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:51:46.156 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+19:51:47.410 [main] INFO  c.a.a.AgricultureApplication[logStarted] - Started AgricultureApplication in 5.956 seconds (JVM running for 6.513)
+19:51:52.052 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:51:52.055 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:51:56.066 [http-nio-8089-exec-2] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:51:56.074 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:51:56.074 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:51:57.392 [http-nio-8089-exec-8] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:51:57.398 [http-nio-8089-exec-10] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:51:57.400 [http-nio-8089-exec-6] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:51:58.412 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:51:58.427 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:51:58.427 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:52:00.101 [http-nio-8089-exec-9] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:52:00.108 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:52:00.108 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:52:16.737 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:52:16.745 [http-nio-8089-exec-2] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:52:16.746 [http-nio-8089-exec-2] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:52:17.487 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:52:17.493 [http-nio-8089-exec-8] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:52:17.494 [http-nio-8089-exec-8] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:52:18.041 [http-nio-8089-exec-10] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:52:18.047 [http-nio-8089-exec-6] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:52:18.048 [http-nio-8089-exec-6] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:52:18.962 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:52:18.969 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:52:18.970 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:52:47.097 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:52:48.880 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:52:48.905 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:52:49.809 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+19:52:51.121 [main] INFO  c.a.a.AgricultureApplication[logStarted] - Started AgricultureApplication in 5.98 seconds (JVM running for 6.529)
+19:52:55.460 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:52:55.464 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:52:59.148 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:52:59.156 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:52:59.157 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:04.385 [http-nio-8089-exec-2] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:53:04.394 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:04.394 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:33.620 [main] INFO  c.a.a.AgricultureApplication[logStartupProfileInfo] - The following profiles are active: dev
+19:53:35.375 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - .............初始化 aosica-agriculture 数据..................
+19:53:35.402 [main] INFO  c.a.a.config.DataBaseConfiguration[dataSource] - ............数据 aosica-agriculture 连接成功..................
+19:53:36.312 [main] INFO  c.a.a.config.MybatisConfiguration[pageHelper] - ************ init MyBatis pageHelper  *********** 
+19:53:37.566 [main] INFO  c.a.a.AgricultureApplication[logStarted] - Started AgricultureApplication in 5.908 seconds (JVM running for 6.46)
+19:53:41.969 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:41.973 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:46.292 [http-nio-8089-exec-2] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:53:46.297 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:46.298 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:47.423 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:53:47.430 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:47.430 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:48.415 [http-nio-8089-exec-6] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:53:48.421 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:48.422 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:55.519 [http-nio-8089-exec-8] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:53:55.527 [http-nio-8089-exec-9] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:55.527 [http-nio-8089-exec-9] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:56.217 [http-nio-8089-exec-10] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:53:56.224 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:56.225 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:56.857 [http-nio-8089-exec-2] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:53:56.864 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:56.864 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:57.583 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:53:57.589 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:57.590 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:58.290 [http-nio-8089-exec-6] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:53:58.296 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:58.297 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:53:59.278 [http-nio-8089-exec-8] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:53:59.285 [http-nio-8089-exec-9] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:53:59.285 [http-nio-8089-exec-9] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:54:00.514 [http-nio-8089-exec-10] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:54:00.520 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:54:00.520 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:54:01.551 [http-nio-8089-exec-2] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:54:01.558 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:54:01.558 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:54:02.171 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:54:02.178 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:54:02.179 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:54:02.843 [http-nio-8089-exec-6] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:54:02.850 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:54:02.851 [http-nio-8089-exec-3] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:54:04.079 [http-nio-8089-exec-8] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:54:04.086 [http-nio-8089-exec-9] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:54:04.087 [http-nio-8089-exec-9] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:54:04.769 [http-nio-8089-exec-10] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:54:04.777 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:54:04.777 [http-nio-8089-exec-1] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:54:05.404 [http-nio-8089-exec-2] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:54:05.410 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:54:05.410 [http-nio-8089-exec-7] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)
+19:54:06.038 [http-nio-8089-exec-4] INFO  c.a.a.service.WebSocketService[onClose] - 有连接关闭，当前连接数为：0
+19:54:06.046 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onOpen] - 有连接加入，当前连接数为：1
+19:54:06.046 [http-nio-8089-exec-5] INFO  c.a.a.service.WebSocketService[onMessage] - 来自客户端的消息：消息发送测试(From Client)

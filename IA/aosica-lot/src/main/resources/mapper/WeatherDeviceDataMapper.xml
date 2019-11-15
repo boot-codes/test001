@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aosica.lot.mapper.WeatherDeviceMapper">
+
+  <resultMap id="BaseResultMap" type="com.aosica.lot.entity.WeatherDevice">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="project_id" jdbcType="VARCHAR" property="projectId" />
+    <result column="device_id" jdbcType="VARCHAR" property="deviceId" />
+    <result column="device_model" jdbcType="VARCHAR" property="deviceModel" />
+    <result column="wind_speed" jdbcType="DECIMAL" property="windSpeed" />
+    <result column="wind_direction" jdbcType="DECIMAL" property="windDirection" />
+    <result column="temperature" jdbcType="DECIMAL" property="temperature" />
+    <result column="humidity" jdbcType="DECIMAL" property="humidity" />
+    <result column="rainfall" jdbcType="DECIMAL" property="rainfall" />
+    <result column="illumination" jdbcType="TIMESTAMP" property="illumination" />
+    <result column="atmospheric_pressure" jdbcType="DECIMAL" property="atmosphericPressure" />
+    <result column="collector_date" jdbcType="TIMESTAMP" property="collectorDate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+
+
+  <sql id="Base_Column_List">
+    id, project_id, device_id, device_model, wind_speed, wind_direction, temperature, 
+    humidity, rainfall, illumination, atmospheric_pressure, collector_date, remark
+  </sql>
+
+
+<!--  <select id="selectByExample" parameterType="com.aosica.lot.dto.WeatherDeviceData" resultMap="BaseResultMap">-->
+<!--    select-->
+<!--    <if test="distinct">-->
+<!--      distinct-->
+<!--    </if>-->
+<!--    <include refid="Base_Column_List" />-->
+<!--    from t_weather_device_data-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--    <if test="orderByClause != null">-->
+<!--      order by ${orderByClause}-->
+<!--    </if>-->
+<!--  </select>-->
+
+
+
+
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">-->
+<!--    delete from t_weather_device_data-->
+<!--    where id = #{id,jdbcType=VARCHAR}-->
+<!--  </delete>-->
+
+
+<!--  <delete id="deleteByExample" parameterType="com.aosica.lot.dto.WeatherDeviceData">-->
+<!--    delete from t_weather_device_data-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </delete>-->
+
+
+  <insert id="insert" parameterType="com.aosica.lot.entity.WeatherDevice">
+    insert into t_weather_device_data (id, project_id, device_id, 
+      device_model, wind_speed, wind_direction, 
+      temperature, humidity, rainfall, 
+      illumination, atmospheric_pressure, collector_date, 
+      remark)
+    values (#{id,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, 
+      #{deviceModel,jdbcType=VARCHAR}, #{windSpeed,jdbcType=DECIMAL}, #{windDirection,jdbcType=DECIMAL}, 
+      #{temperature,jdbcType=DECIMAL}, #{humidity,jdbcType=DECIMAL}, #{rainfall,jdbcType=DECIMAL}, 
+      #{illumination,jdbcType=TIMESTAMP}, #{atmosphericPressure,jdbcType=DECIMAL}, #{collectorDate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+
+
+  <!-- Todo 功能描述 : 根据工程id 获取所有气象设备列表 -->
+  <select id="getWeatherDeviceDataList"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_weather_device_data
+    where project_id = #{projectId,jdbcType=VARCHAR}
+  </select>
+
+
+
+<!--  <select id="countByExample" parameterType="com.aosica.lot.dto.WeatherDeviceData" resultType="java.lang.Long">-->
+<!--    select count(*) from t_weather_device_data-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </select>-->
+
+
+<!--  <update id="updateByExampleSelective" parameterType="map">-->
+<!--    update t_weather_device_data-->
+<!--    <set>-->
+<!--      <if test="record.id != null">-->
+<!--        id = #{record.id,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.projectId != null">-->
+<!--        project_id = #{record.projectId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.deviceId != null">-->
+<!--        device_id = #{record.deviceId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.deviceModel != null">-->
+<!--        device_model = #{record.deviceModel,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="record.windSpeed != null">-->
+<!--        wind_speed = #{record.windSpeed,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="record.windDirection != null">-->
+<!--        wind_direction = #{record.windDirection,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="record.temperature != null">-->
+<!--        temperature = #{record.temperature,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="record.humidity != null">-->
+<!--        humidity = #{record.humidity,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="record.rainfall != null">-->
+<!--        rainfall = #{record.rainfall,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="record.illumination != null">-->
+<!--        illumination = #{record.illumination,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="record.atmosphericPressure != null">-->
+<!--        atmospheric_pressure = #{record.atmosphericPressure,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="record.collectorDate != null">-->
+<!--        collector_date = #{record.collectorDate,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="record.remark != null">-->
+<!--        remark = #{record.remark,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Update_By_Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </update>-->
+
+
+
+<!--  <update id="updateByExample" parameterType="map">-->
+<!--    update t_weather_device_data-->
+<!--    set id = #{record.id,jdbcType=VARCHAR},-->
+<!--      project_id = #{record.projectId,jdbcType=VARCHAR},-->
+<!--      device_id = #{record.deviceId,jdbcType=VARCHAR},-->
+<!--      device_model = #{record.deviceModel,jdbcType=VARCHAR},-->
+<!--      wind_speed = #{record.windSpeed,jdbcType=DECIMAL},-->
+<!--      wind_direction = #{record.windDirection,jdbcType=DECIMAL},-->
+<!--      temperature = #{record.temperature,jdbcType=DECIMAL},-->
+<!--      humidity = #{record.humidity,jdbcType=DECIMAL},-->
+<!--      rainfall = #{record.rainfall,jdbcType=DECIMAL},-->
+<!--      illumination = #{record.illumination,jdbcType=TIMESTAMP},-->
+<!--      atmospheric_pressure = #{record.atmosphericPressure,jdbcType=DECIMAL},-->
+<!--      collector_date = #{record.collectorDate,jdbcType=TIMESTAMP},-->
+<!--      remark = #{record.remark,jdbcType=VARCHAR}-->
+<!--    <if test="_parameter != null">-->
+<!--      <include refid="Update_By_Example_Where_Clause" />-->
+<!--    </if>-->
+<!--  </update>-->
+
+
+
+<!--  <update id="updateByPrimaryKeySelective" parameterType="com.aosica.netty.dto.TWeatherDeviceData">-->
+<!--    update t_weather_device_data-->
+<!--    <set>-->
+<!--      <if test="projectId != null">-->
+<!--        project_id = #{projectId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="deviceId != null">-->
+<!--        device_id = #{deviceId,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="deviceModel != null">-->
+<!--        device_model = #{deviceModel,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--      <if test="windSpeed != null">-->
+<!--        wind_speed = #{windSpeed,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="windDirection != null">-->
+<!--        wind_direction = #{windDirection,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="temperature != null">-->
+<!--        temperature = #{temperature,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="humidity != null">-->
+<!--        humidity = #{humidity,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="rainfall != null">-->
+<!--        rainfall = #{rainfall,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="illumination != null">-->
+<!--        illumination = #{illumination,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="atmosphericPressure != null">-->
+<!--        atmospheric_pressure = #{atmosphericPressure,jdbcType=DECIMAL},-->
+<!--      </if>-->
+<!--      <if test="collectorDate != null">-->
+<!--        collector_date = #{collectorDate,jdbcType=TIMESTAMP},-->
+<!--      </if>-->
+<!--      <if test="remark != null">-->
+<!--        remark = #{remark,jdbcType=VARCHAR},-->
+<!--      </if>-->
+<!--    </set>-->
+<!--    where id = #{id,jdbcType=VARCHAR}-->
+<!--  </update>-->
+
+
+<!--  <update id="updateByPrimaryKey" parameterType="com.aosica.lot.dto.WeatherDeviceData">-->
+<!--    update t_weather_device_data-->
+<!--    set project_id = #{projectId,jdbcType=VARCHAR},-->
+<!--      device_id = #{deviceId,jdbcType=VARCHAR},-->
+<!--      device_model = #{deviceModel,jdbcType=VARCHAR},-->
+<!--      wind_speed = #{windSpeed,jdbcType=DECIMAL},-->
+<!--      wind_direction = #{windDirection,jdbcType=DECIMAL},-->
+<!--      temperature = #{temperature,jdbcType=DECIMAL},-->
+<!--      humidity = #{humidity,jdbcType=DECIMAL},-->
+<!--      rainfall = #{rainfall,jdbcType=DECIMAL},-->
+<!--      illumination = #{illumination,jdbcType=TIMESTAMP},-->
+<!--      atmospheric_pressure = #{atmosphericPressure,jdbcType=DECIMAL},-->
+<!--      collector_date = #{collectorDate,jdbcType=TIMESTAMP},-->
+<!--      remark = #{remark,jdbcType=VARCHAR}-->
+<!--    where id = #{id,jdbcType=VARCHAR}-->
+<!--  </update>-->
+
+
+</mapper>

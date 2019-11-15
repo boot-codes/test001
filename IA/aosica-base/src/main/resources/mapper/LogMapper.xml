@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aoscia.base.mapper.LogMapper">
+    <insert id="save" parameterType="com.aoscia.base.dto.LogDto">
+        insert into ai_log (id,type,bill_id,result,illustrate,operation_by,create_time)
+        values
+          (
+          #{id},#{type},#{billId},#{result},#{explain},#{operationBy},#{createTime}
+          )
+    </insert>
+</mapper>
